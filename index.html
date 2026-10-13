@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,8 +11,7 @@
             --bg:#fff;--bg-alt:#f5f5f7;--card:#fff;--card-2:#fafafa;
             --border:#e5e5e5;--border-2:#d4d4d4;
             --text:#1d1d1f;--text-2:#6e6e73;--text-3:#86868b;
-            --accent:#1e8449;--accent-bg:#e8f3e8;--accent-text:#1e8449;
-            --accent-grad:linear-gradient(135deg,#1e8449,#34d85a);
+            --accent:#2d8a4e;--accent-bg:#e8f3e8;--accent-text:#2d8a4e;
             --nav-bg:rgba(255,255,255,.85);
             --shadow:rgba(0,0,0,.05);
             --input-bg:#fafafa;
@@ -21,8 +20,7 @@
             --bg:#000;--bg-alt:#0a0a0c;--card:#141416;--card-2:#1c1c1e;
             --border:#26262a;--border-2:#3a3a3c;
             --text:#f5f5f7;--text-2:#a1a1a6;--text-3:#6e6e73;
-            --accent:#34d85a;--accent-bg:rgba(48,209,88,.12);--accent-text:#34d85a;
-            --accent-grad:linear-gradient(135deg,#2d8a4e,#34d85a);
+            --accent:#30d158;--accent-bg:rgba(48,209,88,.15);--accent-text:#30d158;
             --nav-bg:rgba(0,0,0,.7);
             --shadow:rgba(0,0,0,.5);
             --input-bg:#2c2c2e;
@@ -46,8 +44,8 @@
         .section-sub{font-size:1.1rem;color:var(--text-2);max-width:620px;margin-bottom:56px;font-weight:400}
 
         .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 30px;border-radius:100px;border:none;font-size:.95rem;font-weight:500;cursor:pointer;transition:all .25s ease}
-        .btn-accent{background:var(--accent-grad);color:#fff}
-        .btn-accent:hover{filter:brightness(1.15);transform:translateY(-2px);box-shadow:0 4px 20px rgba(52,216,90,.3)}
+        .btn-accent{background:var(--accent);color:#fff}
+        .btn-accent:hover{filter:brightness(1.1);transform:translateY(-1px)}
         .gps-btn{background:transparent;color:var(--accent);border:1px solid var(--accent);border-radius:10px;padding:8px 10px;font-size:.8rem;cursor:pointer;width:100%;margin-bottom:10px}
         .gps-btn:hover{background:rgba(48,209,88,.1)}
         .btn-outline{background:transparent;color:var(--text);border:1.5px solid var(--border-2)}
@@ -273,7 +271,7 @@
             </div>
             <div class="nav-actions">
                 <button class="nav-btn" id="langToggle" title="Español / English" onclick="toggleLang()">ES</button>
-                <button class="nav-btn" id="themeToggle" title="Dark / Light" onclick="toggleTheme()">☀️</button>
+                <button class="nav-btn" id="themeToggle" title="Dark / Light" onclick="toggleTheme()">🌙</button>
                 <a href="tel:+17046051318" class="nav-phone">📞 <span class="txt" data-phone>(704) 605-1318</span></a>
                 <button class="nav-toggle" id="navToggle" aria-label="Menu">
                     <span></span><span></span><span></span>
@@ -306,7 +304,7 @@
                 <p data-i18n="hero_p">Broken down? Stranded? One call and we're there in 1-5 minutes. Real person, real truck, right now.</p>
                 <div class="hero-actions">
                     <a href="tel:+17046051318" class="btn btn-call" data-phone-link>📞 <span data-i18n="hero_call">Call Now</span> — <span data-phone>(704) 605-1318</span></a>
-                    <a href="#booking" class="btn btn-outline" data-i18n="hero_services">📞 Book a Tow ↓</a>
+                    <a href="#booking" class="btn btn-outline" data-i18n="hero_services">Book Online ↓</a>
                 </div>
                 <div class="hero-stats">
                     <div class="hero-stat"><h3>1-5</h3><p data-i18n="hero_s1">Min response</p></div>
@@ -316,7 +314,7 @@
             </div>
             <div class="hero-visual">
                 <div class="ufo-float">🛸</div>
-                <img src="assets/tow-suv.jpg" alt="Alien Towing RAM 2500 tow truck">
+                <img src="assets/truck-ram2500.jpg" alt="Alien Towing RAM 2500 tow truck">
             </div>
         </div>
     </section>
@@ -332,7 +330,7 @@
         <div class="container">
             <p class="section-label fade-up" data-i18n="lbl_book">Book</p>
             <h2 class="section-title fade-up" data-i18n="t_book">Get help in seconds</h2>
-            <p class="section-sub fade-up" data-i18n="s_book">Emergency? Call us. Non-urgent? Fill this out and we'll confirm within 5 minutes.</p>
+            <p class="section-sub fade-up" data-i18n="s_book">Emergency? Call us. Non-urgent? Fill this out and we'll confirm within the hour.</p>
             <div class="booking-grid">
                 <div class="booking-form fade-up">
                     <div class="book-call-now">
@@ -358,7 +356,7 @@
                             <option value="other" data-i18n="bk_oth">Other</option>
                         </select>
                         <textarea name="details" placeholder="What happened? (optional)" data-i18n-ph="ph_details"></textarea>
-                        <button type="submit" class="btn btn-accent" data-i18n="bk_submit">📞 Book a Tow →</button>
+                        <button type="submit" class="btn btn-accent" data-i18n="bk_submit">Book My Tow →</button>
                     </form>
                 </div>
                 <div class="booking-info fade-up">
@@ -400,11 +398,11 @@
             <p class="section-sub fade-up" data-i18n="s_fleet">Real trucks. Real work. Ready for anything.</p>
             <div class="fleet-grid">
                 <div class="fleet-card"><img src="assets/truck-ram5500.jpg" alt="RAM 5500 heavy duty"><div class="cap" data-i18n="ft1">RAM 5500 — Heavy-Duty Recovery</div></div>
-                <div class="fleet-card"><img src="assets/tow-sedan.jpg" alt="Tow truck with purple sedan"><div class="cap" data-i18n="ft2">On the job — Sedan flatbed tow</div></div>
-                <div class="fleet-card"><img src="assets/tow-double.jpg" alt="RAM 3500 towing blue car"><div class="cap" data-i18n="ft3">Double load — two at a time</div></div>
-                <div class="fleet-card"><img src="assets/tow-van.jpg" alt="Dodge flatbed in the yard"><div class="cap" data-i18n="ft4">Van recovery — on the job</div></div>
-                <div class="fleet-card"><img src="assets/tow-ram-flatbed.jpg" alt="Tow truck roadside"><div class="cap" data-i18n="ft5">RAM flatbed — ready to roll</div></div>
-                <div class="fleet-card"><img src="assets/tow-junk-buy.jpg" alt="We buy junk cars"><div class="cap" data-i18n="ft6">We buy junk cars — branded & ready</div></div>
+                <div class="fleet-card"><img src="assets/truck-purple.jpg" alt="Tow truck with purple sedan"><div class="cap" data-i18n="ft2">On the job — sedan transport</div></div>
+                <div class="fleet-card"><img src="assets/truck-ram3500.jpg" alt="RAM 3500 towing blue car"><div class="cap" data-i18n="ft3">RAM 3500 — Standard Towing</div></div>
+                <div class="fleet-card"><img src="assets/truck-lot.jpg" alt="Dodge flatbed in the yard"><div class="cap" data-i18n="ft4">In the yard — flatbed ready</div></div>
+                <div class="fleet-card"><img src="assets/truck-scene.jpg" alt="Tow truck roadside"><div class="cap" data-i18n="ft5">Roadside — black SUV recovery</div></div>
+                <div class="fleet-card"><img src="assets/junk-cars.jpg" alt="We buy junk cars"><div class="cap" data-i18n="ft6">We buy junk cars — cash today</div></div>
             </div>
         </div>
     </section>
@@ -526,10 +524,10 @@
             en:{
                 nav_services:'Services',nav_fleet:'Fleet',nav_vehicles:'Vehicles',nav_parts:'Parts',nav_book:'Book',nav_areas:'Areas',
                 lead_title:'Need a tow? 🚨',lead_sub:"Drop your name & number — we call you back. Fast.",ph_name:'Your name',ph_phone:'Phone number',ph_loc:'Where are you? (optional)',lead_btn:'☎ We\'ll Call You',lead_or:'Or call',lead_dismiss:'Just looking',
-                hero_p:'Broken down? Stranded? One call and we\\'re there in 1-5 minutes. Real person, real truck, right now.',hero_call:'Call Now',hero_services:'📞 Book a Tow ↓',hero_s1:'Min response',hero_s2:'Always on call',hero_s3:'Satisfaction',
+                hero_p:'Broken down? Stranded? One call and we\\'re there in 1-5 minutes. Real person, real truck, right now.',hero_call:'Call Now',hero_services:'Book Online ↓',hero_s1:'Min response',hero_s2:'Always on call',hero_s3:'Satisfaction',
                 lbl_book:'Book',t_book:'Get help in seconds',s_book:'Emergency? Call us. Non-urgent? Fill this out and we\'ll confirm within 5 minutes.',
                 bcn_t:'Need it NOW?',bcn_s:'Skip the form — call and a truck rolls.',
-                ph_fullname:'Full name',ph_email:'Email (optional)',ph_vehicle:'Vehicle make & model',bk_sel:'Select service',bk_tow:'Towing',bk_road:'Roadside Assistance',bk_rec:'Heavy-Duty Recovery',bk_trans:'Vehicle Transport',bk_oth:'Other',ph_details:'What happened? (optional)',bk_submit:'📞 Book a Tow →',
+                ph_fullname:'Full name',ph_email:'Email (optional)',ph_vehicle:'Vehicle make & model',bk_sel:'Select service',bk_tow:'Towing',bk_road:'Roadside Assistance',bk_rec:'Heavy-Duty Recovery',bk_trans:'Vehicle Transport',bk_oth:'Other',ph_details:'What happened? (optional)',bk_submit:'Book My Tow →',
                 bk_why:'Why people call us',bk_whyp:'Fast, fair, and reliable. No hidden fees, no voicemail, no runaround.',
                 bk_b1:'1-5 min response',bk_b1s:'Average across Charlotte — every single time',bk_b2:'Upfront pricing',bk_b2s:'You approve the quote before we roll',bk_b3:'Licensed & insured',bk_b3s:'USDOT #4568462 — Full commercial coverage',bk_b4:'Live dispatch',bk_b4s:'Real person answers, not a voicemail box',
                 lbl_services:'Services',t_services:'What we do',s_services:'Full-spectrum towing and recovery. One call, one truck, done.',
@@ -540,7 +538,7 @@
                 sv5_t:'Long-Distance Towing',sv5_d:'Need a car moved across state lines? Competitive rates, real-time tracking, transparent pricing.',
                 sv6_t:'We Buy Junk Cars',sv6_d:'Got a vehicle taking up space? We\'ll buy it on the spot, tow it free, and handle all the paperwork.',sv6_tag:'Cash today',
                 lbl_fleet:'Our Fleet',t_fleet:'Meet the trucks',s_fleet:'Real trucks. Real work. Ready for anything.',
-                ft1:'RAM 5500 — Heavy-Duty Recovery',ft2:'On the job — Sedan flatbed tow',ft3:'Double load — two at a time',ft4:'Van recovery — on the job',ft5:'RAM flatbed — ready to roll',ft6:'We buy junk cars — branded & ready',
+                ft1:'RAM 5500 — Heavy-Duty Recovery',ft2:'On the job — sedan transport',ft3:'RAM 3500 — Standard Towing',ft4:'In the yard — flatbed ready',ft5:'Roadside — black SUV recovery',ft6:'We buy junk cars — cash today',
                 lbl_reviews:'Reviews',t_reviews:'Customers give us 5 stars',s_reviews:'Real people, real tows, real reviews. Hover to pause.',
                 lbl_areas:'Coverage',t_areas:'Where we serve',s_areas:'Greater Charlotte and surrounding areas. 24/7, 365. Click any area to open Apple Maps.',map_note:'Charlotte, NC & surroundings —',map_open:'Open full map ↗',
                 lbl_inv:'Inventory',t_inv:'Cars & trucks for sale',s_inv:'We buy, sell, and trade. Every vehicle inspected and ready to drive.',
@@ -548,15 +546,15 @@
                 cta_t:'Need a tow right now?',cta_p:"We're standing by. Call and we'll have a truck on the way before you hang up.",
                 sticky_call:'Call Now',
                 ft_city:'Charlotte, NC',ft_line:'Licensed · Insured · 24/7 Emergency Service',
-                avail:'Available',sold:'Sold',inquire:'📞 Get a Call',view_similar:'Sold — View Similar',no_parts:'No parts found. Try a different search or',call_us:'call us',
+                avail:'Available',sold:'Sold',inquire:'Inquire',view_similar:'Sold — View Similar',no_parts:'No parts found. Try a different search or',call_us:'call us',
             },
             es:{
                 nav_services:'Servicios',nav_fleet:'Flota',nav_vehicles:'Vehículos',nav_parts:'Repuestos',nav_book:'Reservar',nav_areas:'Áreas',
                 lead_title:'¿Necesitas remolque? 🚨',lead_sub:'Déjanos tu nombre y número — te llamamos. Rápido.',ph_name:'Tu nombre',ph_phone:'Número de teléfono',ph_loc:'¿Dónde estás? (opcional)',lead_btn:'☎ Te Llamamos',lead_or:'O llama',lead_dismiss:'Solo mirando',
-                hero_badge:'Remolque de emergencia 24/7 — Charlotte NC',hero_h1a:'Remolque que',hero_h1b:'viene de otro mundo',hero_p:'¿Descompuesto? ¿Varado? Una llamada y llegamos en 1-5 minutos. Persona real, camión real, ahora mismo.',hero_call:'Llama Ahora',hero_services:'📞 Reserva un Remolque ↓',hero_s1:'Respuesta en min',hero_s2:'Siempre disponibles',hero_s3:'Satisfacción',
+                hero_badge:'Remolque de emergencia 24/7 — Charlotte NC',hero_h1a:'Remolque que',hero_h1b:'viene de otro mundo',hero_p:'¿Descompuesto? ¿Varado? Una llamada y llegamos en 1-5 minutos. Persona real, camión real, ahora mismo.',hero_call:'Llama Ahora',hero_services:'Reservar en Línea ↓',hero_s1:'Respuesta en min',hero_s2:'Siempre disponibles',hero_s3:'Satisfacción',
                 lbl_book:'Reservar',t_book:'Ayuda en segundos',s_book:'¿Emergencia? Llámanos. ¿No es urgente? Llena esto y confirmamos en 5 minutos.',
                 bcn_t:'¿Lo necesitas YA?',bcn_s:'Olvida el formulario — llama y el camión sale.',
-                ph_fullname:'Nombre completo',ph_email:'Correo (opcional)',ph_vehicle:'Marca y modelo del vehículo',bk_sel:'Selecciona el servicio',bk_tow:'Remolque',bk_road:'Asistencia en Carretera',bk_rec:'Recuperación Pesada',bk_trans:'Transporte de Vehículos',bk_oth:'Otro',ph_details:'¿Qué pasó? (opcional)',bk_submit:'📞 Reservar Ahora →',
+                ph_fullname:'Nombre completo',ph_email:'Correo (opcional)',ph_vehicle:'Marca y modelo del vehículo',bk_sel:'Selecciona el servicio',bk_tow:'Remolque',bk_road:'Asistencia en Carretera',bk_rec:'Recuperación Pesada',bk_trans:'Transporte de Vehículos',bk_oth:'Otro',ph_details:'¿Qué pasó? (opcional)',bk_submit:'Reservar mi Remolque →',
                 bk_why:'Por qué nos llaman',bk_whyp:'Rápido, justo y confiable. Sin cobros ocultos, sin contestadoras, sin rodeos.',
                 bk_b1:'Respuesta en 1-5 min',bk_b1s:'Promedio en todo Charlotte — cada vez',bk_b2:'Precio por adelantado',bk_b2s:'Apruebas el precio antes de que salgamos',bk_b3:'Licencia y seguro',bk_b3s:'USDOT #4568462 — Cobertura comercial completa',bk_b4:'Despacho en vivo',bk_b4s:'Una persona real contesta, no una máquina',
                 lbl_services:'Servicios',t_services:'Qué hacemos',s_services:'Remolque y recuperación completo. Una llamada, un camión, listo.',
@@ -567,7 +565,7 @@
                 sv5_t:'Remolque de Larga Distancia',sv5_d:'¿Necesitas mover un carro a otro estado? Precios competitivos, seguimiento en tiempo real, precios transparentes.',
                 sv6_t:'Compramos Carros Chatarra',sv6_d:'¿Tienes un vehículo estorbando? Lo compramos al momento, remolque gratis y manejamos todos los papeles.',sv6_tag:'Efectivo hoy',
                 lbl_fleet:'Nuestra Flota',t_fleet:'Conoce los camiones',s_fleet:'Camiones reales. Trabajo real. Listos para todo.',
-                ft1:'RAM 5500 — Recuperación Pesada',ft2:'En el trabajo — sedán en plataforma',ft3:'Doble carga — dos a la vez',ft4:'Recuperación de van — en acción',ft5:'RAM plataforma — listo para rodar',ft6:'Compramos carros chatarra — listo',
+                ft1:'RAM 5500 — Recuperación Pesada',ft2:'En el trabajo — transporte de sedán',ft3:'RAM 3500 — Remolque Estándar',ft4:'En el patio — plataforma lista',ft5:'Carretera — recuperación de SUV',ft6:'Compramos carros chatarra — efectivo hoy',
                 lbl_reviews:'Opiniones',t_reviews:'Clientes nos dan 5 estrellas',s_reviews:'Gente real, remolques reales, reseñas reales. Pasa el cursor para pausar.',
                 lbl_areas:'Cobertura',t_areas:'Dónde servimos',s_areas:'Charlotte y alrededores. 24/7, 365. Haz clic en cualquier área para abrir Apple Maps.',map_note:'Charlotte, NC y alrededores —',map_open:'Abrir mapa completo ↗',
                 lbl_inv:'Inventario',t_inv:'Carros y camiones en venta',s_inv:'Compramos, vendemos e intercambiamos. Cada vehículo inspeccionado y listo para manejar.',
@@ -581,7 +579,7 @@
 
         /* ============ STATE ============ */
         let lang = localStorage.getItem('lang') || 'en';
-        let theme = localStorage.getItem('theme') || 'dark';
+        let theme = localStorage.getItem('theme') || 'light';
 
         function applyTheme(){
             document.documentElement.setAttribute('data-theme',theme);
