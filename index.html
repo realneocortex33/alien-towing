@@ -141,12 +141,14 @@
         .service-card .tag{display:inline-block;margin-top:12px;padding:3px 12px;border-radius:100px;font-size:.72rem;font-weight:600;background:var(--card-2);color:var(--text-2);border:1px solid var(--border)}
         .service-card .tag.accent{background:var(--accent-bg);color:var(--accent-text);border-color:transparent}
 
-        .fleet-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:18px}
-        .fleet-card{border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--border);transition:all .3s;opacity:0;transform:translateY(16px)}
+        .fleet-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(340px,100%),1fr));gap:18px}
+        .fleet-card{display:flex;flex-direction:column;border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--border);transition:all .3s;opacity:0;transform:translateY(16px)}
         .fleet-card.visible{opacity:1;transform:translateY(0)}
-        .fleet-card:hover{box-shadow:0 10px 36px var(--shadow)}
-        .fleet-card img{width:100%;aspect-ratio:16/10;object-fit:cover}
-        .fleet-card .cap{padding:14px 18px;font-size:.85rem;color:var(--text-2);font-weight:500}
+        .fleet-card:hover{box-shadow:0 10px 36px var(--shadow);border-color:var(--border-2)}
+        .fleet-card .ph{aspect-ratio:4/3;overflow:hidden;background:var(--card-2)}
+        .fleet-card img{width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .5s ease}
+        .fleet-card:hover img{transform:scale(1.04)}
+        .fleet-card .cap{padding:14px 18px;font-size:.85rem;color:var(--text-2);font-weight:500;border-top:1px solid var(--border);margin-top:auto}
 
         #testimonials{overflow:hidden}
         .testimonial-wrap{position:relative}
@@ -176,33 +178,37 @@
 
         /* vehicles + parts at BOTTOM of page */
         #vehicles{background:var(--bg)}
-        .vehicle-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px}
-        .vehicle-card{border-radius:16px;overflow:hidden;border:1px solid var(--border);background:var(--card);transition:all .3s;opacity:0;transform:translateY(16px)}
+        .vehicle-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:18px}
+        .vehicle-card{display:flex;flex-direction:column;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:var(--card);transition:all .3s;opacity:0;transform:translateY(16px)}
         .vehicle-card.visible{opacity:1;transform:translateY(0)}
         .vehicle-card:hover{box-shadow:0 10px 36px var(--shadow)}
         .vehicle-img{aspect-ratio:16/10;background:var(--card-2);display:flex;align-items:center;justify-content:center;color:var(--text-3);font-size:.85rem;position:relative;border-bottom:1px solid var(--border);overflow:hidden}
         .vehicle-img img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
-        .vehicle-img .badge{position:absolute;top:12px;right:12px;padding:3px 12px;border-radius:100px;font-size:.72rem;font-weight:600}
+        .vehicle-img .badge{position:absolute;top:12px;right:12px;z-index:1;padding:3px 12px;border-radius:100px;font-size:.72rem;font-weight:600}
         .vehicle-img .badge.avail{background:var(--accent-bg);color:var(--accent-text)}
-        .vehicle-img .badge.sold{background:#fee;color:#c33}
-        .vehicle-info{padding:22px}
+        .vehicle-img .badge.sold{background:rgba(204,51,51,.12);color:#d33}
+        .vehicle-img .swatch{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:100px;background:var(--card);border:1px solid var(--border);color:var(--text-2);font-weight:500}
+        .vehicle-img .swatch::before{content:'';width:10px;height:10px;border-radius:50%;background:var(--accent)}
+        .vehicle-img .photo-slot{position:absolute;bottom:12px;left:12px;padding:3px 10px;border-radius:100px;border:1px dashed var(--border-2);font-size:.7rem;color:var(--text-3);background:var(--card)}
+        .vehicle-info{padding:22px;display:flex;flex-direction:column;flex:1}
         .vehicle-info h3{font-size:1rem;font-weight:600;margin-bottom:4px}
         .vehicle-info .price{font-size:1.3rem;font-weight:700;color:var(--accent-text);margin-bottom:6px}
-        .vehicle-info .specs{display:flex;gap:12px;font-size:.8rem;color:var(--text-3);margin-bottom:14px;flex-wrap:wrap}
-        .vehicle-info .btn{width:100%;justify-content:center}
+        .vehicle-info .specs{display:flex;gap:6px 12px;font-size:.8rem;color:var(--text-3);margin-bottom:16px;flex-wrap:wrap}
+        .vehicle-info .btn{width:100%;justify-content:center;margin-top:auto}
 
         #parts{background:var(--bg-alt)}
         .parts-search{display:flex;gap:10px;margin-bottom:40px;flex-wrap:wrap}
         .parts-search input{flex:1;min-width:200px;padding:13px 16px;border-radius:10px;border:1.5px solid var(--border-2);background:var(--input-bg);color:var(--text);font-size:.95rem;outline:none;transition:border-color .25s}
         .parts-search input:focus{border-color:var(--accent)}
         .parts-search input::placeholder{color:var(--text-3)}
-        .parts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
-        .part-card{padding:18px;border-radius:12px;background:var(--card);border:1px solid var(--border);transition:all .2s;opacity:0;transform:translateY(12px)}
+        .parts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(240px,100%),1fr));gap:12px}
+        .part-card{display:flex;flex-direction:column;gap:12px;padding:18px;border-radius:12px;background:var(--card);border:1px solid var(--border);transition:all .2s;opacity:0;transform:translateY(12px)}
         .part-card.visible{opacity:1;transform:translateY(0)}
-        .part-card:hover{border-color:var(--accent)}
-        .part-card h4{font-size:.88rem;font-weight:600;margin-bottom:4px}
-        .part-card .price{color:var(--accent-text);font-weight:700;font-size:1.05rem}
-        .part-card .tag{font-size:.75rem;color:var(--text-3);margin-top:2px}
+        .part-card:hover{border-color:var(--accent);box-shadow:0 8px 28px var(--shadow)}
+        .part-card h4{font-size:.88rem;font-weight:600;line-height:1.4}
+        .part-card .meta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto;padding-top:12px;border-top:1px solid var(--border)}
+        .part-card .price{color:var(--accent-text);font-weight:700;font-size:1.15rem;letter-spacing:-.01em;white-space:nowrap}
+        .part-card .tag{font-size:.7rem;font-weight:600;color:var(--text-2);background:var(--card-2);border:1px solid var(--border);padding:3px 10px;border-radius:100px;text-align:right;line-height:1.4}
 
         .cta-section{background:var(--text);color:var(--bg);padding:76px 0;text-align:center;position:relative;overflow:hidden}
         .cta-section h2{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:700;letter-spacing:-.02em;margin-bottom:10px}
@@ -211,6 +217,10 @@
         .cta-section .btn:hover{filter:brightness(1.1)}
         footer{padding:44px 0;border-top:1px solid var(--border);text-align:center}
         footer p{font-size:.8rem;color:var(--text-3)}
+        footer .ft-contact{display:flex;flex-direction:column;align-items:center;gap:6px;margin-bottom:22px}
+        footer .ft-phone{font-size:1.6rem;font-weight:700;letter-spacing:-.02em;color:var(--accent-text)}
+        footer .ft-phone:hover{filter:brightness(1.15)}
+        footer .ft-contact p{font-size:.85rem;color:var(--text-2);font-weight:500}
         footer .socials{display:flex;justify-content:center;gap:14px;margin-bottom:14px}
         footer .socials a{width:36px;height:36px;border-radius:50%;border:1px solid var(--border-2);display:flex;align-items:center;justify-content:center;transition:all .2s;font-size:.9rem;color:var(--text-2)}
         footer .socials a:hover{border-color:var(--accent);color:var(--accent-text)}
@@ -243,6 +253,12 @@
             .booking-form{padding:26px 20px}
             .hero-stats{gap:20px}
             .hero-stat{flex:1;min-width:90px}
+            .hero-content{min-width:0;width:100%}
+            .services-grid{grid-template-columns:1fr}
+            .book-call-now{flex-wrap:wrap}
+            .book-call-now a{margin-left:0;width:100%}
+            .testimonial-wrap::before,.testimonial-wrap::after{width:40px}
+            .map-embed iframe{height:300px}
             .hero h1{font-size:2.2rem}
             .testimonial-card{width:290px}
             .nav-phone .txt{display:none}
@@ -397,12 +413,12 @@
             <h2 class="section-title fade-up" data-i18n="t_fleet">Meet the trucks</h2>
             <p class="section-sub fade-up" data-i18n="s_fleet">Real trucks. Real work. Ready for anything.</p>
             <div class="fleet-grid">
-                <div class="fleet-card"><img src="assets/truck-ram5500.jpg" alt="RAM 5500 heavy duty"><div class="cap" data-i18n="ft1">RAM 5500 — Heavy-Duty Recovery</div></div>
-                <div class="fleet-card"><img src="assets/truck-purple.jpg" alt="Tow truck with purple sedan"><div class="cap" data-i18n="ft2">On the job — sedan transport</div></div>
-                <div class="fleet-card"><img src="assets/truck-ram3500.jpg" alt="RAM 3500 towing blue car"><div class="cap" data-i18n="ft3">RAM 3500 — Standard Towing</div></div>
-                <div class="fleet-card"><img src="assets/truck-lot.jpg" alt="Dodge flatbed in the yard"><div class="cap" data-i18n="ft4">In the yard — flatbed ready</div></div>
-                <div class="fleet-card"><img src="assets/truck-scene.jpg" alt="Tow truck roadside"><div class="cap" data-i18n="ft5">Roadside — black SUV recovery</div></div>
-                <div class="fleet-card"><img src="assets/junk-cars.jpg" alt="We buy junk cars"><div class="cap" data-i18n="ft6">We buy junk cars — cash today</div></div>
+                <div class="fleet-card"><img src="assets/fleet-ram5500-loaded.png" alt="RAM 5500 heavy duty"><div class="cap" data-i18n="ft1">RAM 5500 — Loaded & ready</div></div>
+                <div class="fleet-card"><img src="assets/fleet-ram2500-action.png" alt="Tow truck with purple sedan"><div class="cap" data-i18n="ft2">RAM 2500 — On the job</div></div>
+                <div class="fleet-card"><img src="assets/fleet-dodge-flatbed.jpg" alt="RAM 3500 towing blue car"><div class="cap" data-i18n="ft3">Dodge Flatbed — Ready to roll</div></div>
+                <div class="fleet-card"><img src="assets/fleet-flatbed-suv.jpg" alt="Dodge flatbed in the yard"><div class="cap" data-i18n="ft4">Flatbed — SUV recovery</div></div>
+                <div class="fleet-card"><img src="assets/fleet-branded-suv.png" alt="Tow truck roadside"><div class="cap" data-i18n="ft5">Branded truck — On scene</div></div>
+                <div class="fleet-card"><img src="assets/fleet-junk-cars.jpg" alt="We buy junk cars"><div class="cap" data-i18n="ft6">We buy junk cars — Cash today</div></div>
             </div>
         </div>
     </section>
@@ -490,13 +506,13 @@
             es:{display:'(704) 606-3696', tel:'+17046063696'}
         };
         const VEHICLES = [
-            /* To add a car: drop a photo in assets/ and add img:'car-filename.jpg' to the entry. All other fields are required. */
-            {name:'2018 Ford F-150 Lariat',price:'$34,900',miles:'48k mi',engine:'3.5L V6 EcoBoost',color:'Velocity Blue',sold:false},
-            {name:'2020 Toyota Tundra SR5',price:'$38,500',miles:'36k mi',engine:'5.7L V8',color:'Cement Gray',sold:false},
-            {name:'2015 RAM 2500 Cummins',price:'$28,900',miles:'89k mi',engine:'6.7L Turbo Diesel',color:'Granite Crystal',sold:false},
-            {name:'2021 Jeep Wrangler Unlimited',price:'$41,200',miles:'22k mi',engine:'3.6L V6',color:'Sarge Green',sold:false},
-            {name:'2017 Chevy Silverado 1500',price:'$26,500',miles:'72k mi',engine:'5.3L V8',color:'Summit White',sold:true},
-            {name:'2019 Honda Civic Si',price:'$23,900',miles:'31k mi',engine:'1.5L Turbo',color:'Sonic Gray',sold:false},
+            /* 📸 To show a photo, add img:'car-filename.jpg' — copy the image to assets/ first. Example below. */
+            {name:'2018 Ford F-150 Lariat',price:'$34,900',miles:'48k mi',engine:'3.5L V6 EcoBoost',color:'Velocity Blue',sold:false,img:''},
+            {name:'2020 Toyota Tundra SR5',price:'$38,500',miles:'36k mi',engine:'5.7L V8',color:'Cement Gray',sold:false,img:''},
+            {name:'2015 RAM 2500 Cummins',price:'$28,900',miles:'89k mi',engine:'6.7L Turbo Diesel',color:'Granite Crystal',sold:false,img:''},
+            {name:'2021 Jeep Wrangler Unlimited',price:'$41,200',miles:'22k mi',engine:'3.6L V6',color:'Sarge Green',sold:false,img:''},
+            {name:'2017 Chevy Silverado 1500',price:'$26,500',miles:'72k mi',engine:'5.3L V8',color:'Summit White',sold:true,img:''},
+            {name:'2019 Honda Civic Si',price:'$23,900',miles:'31k mi',engine:'1.5L Turbo',color:'Sonic Gray',sold:false,img:''},
         ];
         const PARTS = [
             {name:'Alternator — Honda Accord 2013-2017',price:'$89',condition:'OEM Remanufactured'},
@@ -524,7 +540,7 @@
             en:{
                 nav_services:'Services',nav_fleet:'Fleet',nav_vehicles:'Vehicles',nav_parts:'Parts',nav_book:'Book',nav_areas:'Areas',
                 lead_title:'Need a tow? 🚨',lead_sub:"Drop your name & number — we call you back. Fast.",ph_name:'Your name',ph_phone:'Phone number',ph_loc:'Where are you? (optional)',lead_btn:'☎ We\'ll Call You',lead_or:'Or call',lead_dismiss:'Just looking',
-                hero_p:'Broken down? Stranded? One call and we\\'re there in 1-5 minutes. Real person, real truck, right now.',hero_call:'Call Now',hero_services:'Book Online ↓',hero_s1:'Min response',hero_s2:'Always on call',hero_s3:'Satisfaction',
+                hero_p:'Broken down? Stranded? One call and we\'re there in 1-5 minutes. Real person, real truck, right now.',hero_call:'Call Now',hero_services:'Book Online ↓',hero_s1:'Min response',hero_s2:'Always on call',hero_s3:'Satisfaction',
                 lbl_book:'Book',t_book:'Get help in seconds',s_book:'Emergency? Call us. Non-urgent? Fill this out and we\'ll confirm within 5 minutes.',
                 bcn_t:'Need it NOW?',bcn_s:'Skip the form — call and a truck rolls.',
                 ph_fullname:'Full name',ph_email:'Email (optional)',ph_vehicle:'Vehicle make & model',bk_sel:'Select service',bk_tow:'Towing',bk_road:'Roadside Assistance',bk_rec:'Heavy-Duty Recovery',bk_trans:'Vehicle Transport',bk_oth:'Other',ph_details:'What happened? (optional)',bk_submit:'Book My Tow →',
@@ -538,7 +554,7 @@
                 sv5_t:'Long-Distance Towing',sv5_d:'Need a car moved across state lines? Competitive rates, real-time tracking, transparent pricing.',
                 sv6_t:'We Buy Junk Cars',sv6_d:'Got a vehicle taking up space? We\'ll buy it on the spot, tow it free, and handle all the paperwork.',sv6_tag:'Cash today',
                 lbl_fleet:'Our Fleet',t_fleet:'Meet the trucks',s_fleet:'Real trucks. Real work. Ready for anything.',
-                ft1:'RAM 5500 — Heavy-Duty Recovery',ft2:'On the job — sedan transport',ft3:'RAM 3500 — Standard Towing',ft4:'In the yard — flatbed ready',ft5:'Roadside — black SUV recovery',ft6:'We buy junk cars — cash today',
+                ft1:'RAM 5500 — Loaded & ready',ft2:'RAM 2500 — On the job',ft3:'Dodge Flatbed — Ready to roll',ft4:'Flatbed — SUV recovery',ft5:'Branded truck — On scene',ft6:'We buy junk cars — Cash today',
                 lbl_reviews:'Reviews',t_reviews:'Customers give us 5 stars',s_reviews:'Real people, real tows, real reviews. Hover to pause.',
                 lbl_areas:'Coverage',t_areas:'Where we serve',s_areas:'Greater Charlotte and surrounding areas. 24/7, 365. Click any area to open Apple Maps.',map_note:'Charlotte, NC & surroundings —',map_open:'Open full map ↗',
                 lbl_inv:'Inventory',t_inv:'Cars & trucks for sale',s_inv:'We buy, sell, and trade. Every vehicle inspected and ready to drive.',
@@ -565,7 +581,7 @@
                 sv5_t:'Remolque de Larga Distancia',sv5_d:'¿Necesitas mover un carro a otro estado? Precios competitivos, seguimiento en tiempo real, precios transparentes.',
                 sv6_t:'Compramos Carros Chatarra',sv6_d:'¿Tienes un vehículo estorbando? Lo compramos al momento, remolque gratis y manejamos todos los papeles.',sv6_tag:'Efectivo hoy',
                 lbl_fleet:'Nuestra Flota',t_fleet:'Conoce los camiones',s_fleet:'Camiones reales. Trabajo real. Listos para todo.',
-                ft1:'RAM 5500 — Recuperación Pesada',ft2:'En el trabajo — transporte de sedán',ft3:'RAM 3500 — Remolque Estándar',ft4:'En el patio — plataforma lista',ft5:'Carretera — recuperación de SUV',ft6:'Compramos carros chatarra — efectivo hoy',
+                ft1:'RAM 5500 — Cargado & listo',ft2:'RAM 2500 — En el trabajo',ft3:'Dodge Flatbed — Listo para rodar',ft4:'Flatbed — Recuperación de SUV',ft5:'Camión marca — En escena',ft6:'Compramos chatarra — Efectivo hoy',
                 lbl_reviews:'Opiniones',t_reviews:'Clientes nos dan 5 estrellas',s_reviews:'Gente real, remolques reales, reseñas reales. Pasa el cursor para pausar.',
                 lbl_areas:'Cobertura',t_areas:'Dónde servimos',s_areas:'Charlotte y alrededores. 24/7, 365. Haz clic en cualquier área para abrir Apple Maps.',map_note:'Charlotte, NC y alrededores —',map_open:'Abrir mapa completo ↗',
                 lbl_inv:'Inventario',t_inv:'Carros y camiones en venta',s_inv:'Compramos, vendemos e intercambiamos. Cada vehículo inspeccionado y listo para manejar.',
