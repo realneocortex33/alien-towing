@@ -219,7 +219,7 @@
         .sticky-call{position:fixed;left:14px;right:14px;bottom:14px;z-index:150;display:none;align-items:center;justify-content:center;gap:10px;background:var(--accent);color:#fff;font-weight:700;font-size:1.05rem;padding:16px;border-radius:100px;box-shadow:0 10px 34px rgba(0,0,0,.35)}
         body{padding-bottom:0}
 
-        .fade-up{opacity:1;transform:translateY(8px);transition:all .6s ease-out}
+        .fade-up{opacity:0;transform:translateY(20px);transition:all .5s ease-out}
         .fade-up.visible{opacity:1;transform:translateY(0)}
 
         @media(max-width:920px){
@@ -704,12 +704,12 @@
         document.getElementById('navToggle').addEventListener('click',()=>document.getElementById('navLinks').classList.toggle('open'));
         document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open')));
         window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',window.scrollY>50));
-        const obs=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.05});
+        const obs=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.15});
         document.querySelectorAll('.fade-up,.service-card,.vehicle-card,.part-card,.fleet-card,.area-chip').forEach(e=>obs.observe(e));
 
         /* ============ INIT ============ */
         applyTheme();applyLang();renderAreas();renderTestimonials();
-        setTimeout(()=>{document.querySelectorAll('.fade-up,.service-card,.vehicle-card,.part-card,.fleet-card,.area-chip').forEach(e=>{if(!e.classList.contains('visible')){e.classList.add('visible');if(e.classList.contains('fade-up'))e.style.opacity='1'}})},200);
+        setTimeout(()=>{document.querySelectorAll('.fade-up,.service-card,.vehicle-card,.part-card,.fleet-card,.area-chip').forEach(e=>{if(!e.classList.contains('visible'))obs.observe(e)})},200);
     </script>
 </body>
 </html>
