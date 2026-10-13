@@ -6,6 +6,7 @@
     <title>Alien Towing — Charlotte's Premium Towing & Recovery</title>
     <meta name="description" content="24/7 professional towing, roadside assistance, and recovery in Charlotte NC">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛸</text></svg>">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
     <style>
         :root{
             --bg:#fff;--bg-alt:#f5f5f7;--card:#fff;--card-2:#fafafa;
@@ -41,7 +42,9 @@
         .section{padding:48px 0;position:relative}
         .section-label{font-size:.75rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-3);font-weight:600;margin-bottom:12px}
         .section-title{font-size:clamp(2rem,4vw,3rem);font-weight:600;letter-spacing:-.02em;line-height:1.15;margin-bottom:20px}
-        .section-sub{font-size:1.1rem;color:var(--text-2);max-width:620px;margin-bottom:56px;font-weight:400}
+        .section-sub{font-size:1.05rem;color:var(--text-2);max-width:620px;margin-bottom:28px;font-weight:400}
+        [onclick],.area-chip{-webkit-tap-highlight-color:transparent}
+        :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
         .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 30px;border-radius:100px;border:none;font-size:.95rem;font-weight:500;cursor:pointer;transition:all .25s ease}
         .btn-accent{background:var(--accent);color:#fff}
@@ -107,9 +110,9 @@
         @keyframes scrollx{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
         /* BOOK — first section (right below hero) */
-        #booking{background:var(--bg);padding-top:90px}
-        .booking-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:start}
-        .booking-form{padding:36px;border-radius:16px;background:var(--card);border:1px solid var(--border);box-shadow:0 14px 44px var(--shadow)}
+        #booking{background:var(--bg)}
+        .booking-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
+        .booking-form{padding:30px;border-radius:16px;background:var(--card);border:1px solid var(--border);box-shadow:0 14px 44px var(--shadow)}
         .booking-form .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
         .booking-form input,.booking-form select,.booking-form textarea{width:100%;padding:13px 14px;margin-bottom:10px;border-radius:10px;border:1.5px solid var(--border-2);background:var(--input-bg);color:var(--text);font-size:.95rem;outline:none;transition:border-color .25s;font-family:inherit}
         .booking-form input:focus,.booking-form select:focus,.booking-form textarea:focus{border-color:var(--accent)}
@@ -134,7 +137,7 @@
         .services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
         .service-card{cursor:pointer;padding:22px;border-radius:16px;background:var(--card);border:1px solid var(--border);transition:all .3s;opacity:0;transform:translateY(16px)}
         .service-card.visible{opacity:1;transform:translateY(0)}
-        .service-card:hover{border-color:var(--accent);box-shadow:0 10px 36px var(--shadow)}
+        .service-card:hover{border-color:var(--accent);box-shadow:0 10px 36px var(--shadow);transform:translateY(-2px)}
         .service-card .icon{font-size:1.7rem;margin-bottom:14px}
         .service-card h3{font-size:1.1rem;font-weight:600;margin-bottom:8px;letter-spacing:-.01em}
         .service-card p{font-size:.87rem;color:var(--text-2);line-height:1.65}
@@ -144,8 +147,9 @@
         .fleet-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(340px,100%),1fr));gap:12px}
         .fleet-card{cursor:pointer;display:flex;flex-direction:column;border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--border);transition:all .3s;opacity:0;transform:translateY(16px)}
         .fleet-card.visible{opacity:1;transform:translateY(0)}
-        .fleet-card:hover{box-shadow:0 10px 36px var(--shadow);border-color:var(--border-2)}
+        .fleet-card:hover{box-shadow:0 10px 36px var(--shadow);border-color:var(--accent);transform:translateY(-2px)}
         .fleet-card .ph{aspect-ratio:4/3;overflow:hidden;background:var(--card-2)}
+        .fleet-card .ph.top img{object-position:center 30%}
         .fleet-card img{width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .5s ease}
         .fleet-card:hover img{transform:scale(1.04)}
         .fleet-card .cap{padding:14px 18px;font-size:.85rem;color:var(--text-2);font-weight:500;border-top:1px solid var(--border);margin-top:auto}
@@ -169,10 +173,13 @@
         .areas-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;align-content:start}
         .area-chip{cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px 12px;border-radius:10px;background:var(--card);border:1px solid var(--border);text-align:center;font-weight:500;font-size:.8rem;color:var(--text-2);transition:all .2s}
         .area-chip:hover{background:var(--accent-bg);border-color:var(--accent);color:var(--accent-text)}
-        .area-chip svg{width:12px;height:12px;opacity:.6}
-        .map-embed{position:sticky;top:90px;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:var(--card)}
-        .map-embed iframe{width:100%;height:400px;border:0;display:block}
-        [data-theme="dark"] .map-embed iframe{filter:grayscale(1) invert(1) contrast(.9)}
+        .area-chip svg{width:12px;height:12px;opacity:.6;flex-shrink:0}
+        .map-embed{position:sticky;top:76px;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:var(--card)}
+        #serviceMap{width:100%;height:420px;background:var(--card-2);z-index:0}
+        [data-theme="dark"] #serviceMap .leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(.9) contrast(.9)}
+        #serviceMap .leaflet-popup-content a{color:var(--accent);font-weight:600}
+        .map-pin{width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid #fff;box-shadow:0 0 0 2px var(--accent)}
+        .map-hq{font-size:26px;line-height:1;filter:drop-shadow(0 3px 6px rgba(0,0,0,.5))}
         .map-note{padding:12px 16px;font-size:.8rem;color:var(--text-3);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
         .map-note a{color:var(--accent-text);font-weight:600}
 
@@ -181,7 +188,7 @@
         .vehicle-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:12px}
         .vehicle-card{cursor:pointer;display:flex;flex-direction:column;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:var(--card);transition:all .3s;opacity:0;transform:translateY(16px)}
         .vehicle-card.visible{opacity:1;transform:translateY(0)}
-        .vehicle-card:hover{box-shadow:0 10px 36px var(--shadow)}
+        .vehicle-card:hover{box-shadow:0 10px 36px var(--shadow);border-color:var(--accent);transform:translateY(-2px)}
         .vehicle-img{aspect-ratio:16/10;background:var(--card-2);display:flex;align-items:center;justify-content:center;color:var(--text-3);font-size:.85rem;position:relative;border-bottom:1px solid var(--border);overflow:hidden}
         .vehicle-img img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
         .vehicle-img .badge{position:absolute;top:12px;right:12px;z-index:1;padding:3px 12px;border-radius:100px;font-size:.72rem;font-weight:600}
@@ -201,7 +208,7 @@
         .parts-search input{flex:1;min-width:200px;padding:13px 16px;border-radius:10px;border:1.5px solid var(--border-2);background:var(--input-bg);color:var(--text);font-size:.95rem;outline:none;transition:border-color .25s}
         .parts-search input:focus{border-color:var(--accent)}
         .parts-search input::placeholder{color:var(--text-3)}
-        .parts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(240px,100%),1fr));gap:10px}
+        .parts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(240px,100%),1fr));gap:12px}
         .part-card{cursor:pointer;display:flex;flex-direction:column;gap:12px;padding:18px;border-radius:12px;background:var(--card);border:1px solid var(--border);transition:all .2s;opacity:0;transform:translateY(12px)}
         .part-card.visible{opacity:1;transform:translateY(0)}
         .part-card:hover{border-color:var(--accent);box-shadow:0 8px 28px var(--shadow)}
@@ -215,7 +222,7 @@
         .cta-section p{font-size:1rem;opacity:.7;margin-bottom:24px}
         .cta-section .btn{background:var(--accent);color:#fff}
         .cta-section .btn:hover{filter:brightness(1.1)}
-        footer{padding:44px 0;border-top:1px solid var(--border);text-align:center}
+        footer{padding:32px 0;border-top:1px solid var(--border);text-align:center}
         footer p{font-size:.8rem;color:var(--text-3)}
         footer .ft-contact{display:flex;flex-direction:column;align-items:center;gap:6px;margin-bottom:22px}
         footer .ft-phone{font-size:1.6rem;font-weight:700;letter-spacing:-.02em;color:var(--accent-text)}
@@ -258,7 +265,9 @@
             .book-call-now{flex-wrap:wrap}
             .book-call-now a{margin-left:0;width:100%}
             .testimonial-wrap::before,.testimonial-wrap::after{width:40px}
-            .map-embed iframe{height:300px}
+            #serviceMap{height:320px}
+            .section-sub{margin-bottom:22px}
+            .areas-grid{grid-template-columns:repeat(2,1fr)}
             .hero h1{font-size:2.2rem}
             .testimonial-card{width:290px}
             .nav-phone .txt{display:none}
@@ -413,12 +422,12 @@
             <h2 class="section-title fade-up" data-i18n="t_fleet">Meet the trucks</h2>
             <p class="section-sub fade-up" data-i18n="s_fleet">Real trucks. Real work. Ready for anything.</p>
             <div class="fleet-grid">
-                <div class="fleet-card" onclick="callNow()"><img src="assets/fleet-ram5500-loaded.png" alt="RAM 5500 heavy duty"><div class="cap" data-i18n="ft1">RAM 5500 — Loaded & ready</div></div>
-                <div class="fleet-card" onclick="callNow()"><img src="assets/fleet-ram2500-action.png" alt="Tow truck with purple sedan"><div class="cap" data-i18n="ft2">RAM 2500 — On the job</div></div>
-                <div class="fleet-card" onclick="callNow()"><img src="assets/fleet-dodge-flatbed.jpg" alt="RAM 3500 towing blue car"><div class="cap" data-i18n="ft3">Dodge Flatbed — Ready to roll</div></div>
-                <div class="fleet-card" onclick="callNow()"><img src="assets/tow-suv.jpg" alt="Dodge flatbed in the yard"><div class="cap" data-i18n="ft4">Flatbed — SUV recovery</div></div>
-                <div class="fleet-card" onclick="callNow()"><img src="assets/fleet-ufo-scene.jpg" alt="Tow truck roadside"><div class="cap" data-i18n="ft5">Branded truck — On scene</div></div>
-                <div class="fleet-card" onclick="callNow()"><img src="assets/fleet-junk-cars.jpg" alt="We buy junk cars"><div class="cap" data-i18n="ft6">We buy junk cars — Cash today</div></div>
+                <div class="fleet-card" onclick="callNow()"><div class="ph"><img src="assets/fleet-ram5500-loaded.png" alt="RAM 5500 heavy duty" loading="lazy"></div><div class="cap" data-i18n="ft1">RAM 5500 — Loaded & ready</div></div>
+                <div class="fleet-card" onclick="callNow()"><div class="ph"><img src="assets/fleet-ram2500-action.png" alt="Alien Towing flatbed hauling a blue coupe" loading="lazy"></div><div class="cap" data-i18n="ft2">RAM 2500 — On the job</div></div>
+                <div class="fleet-card" onclick="callNow()"><div class="ph"><img src="assets/fleet-dodge-flatbed.jpg" alt="Dodge flatbed" loading="lazy"></div><div class="cap" data-i18n="ft3">Dodge Flatbed — Ready to roll</div></div>
+                <div class="fleet-card" onclick="callNow()"><div class="ph top"><img src="assets/tow-van.jpg" alt="Flatbed hauling a white cargo van" loading="lazy"></div><div class="cap" data-i18n="ft4">Flatbed — SUV recovery</div></div>
+                <div class="fleet-card" onclick="callNow()"><div class="ph"><img src="assets/tow-junk-buy.jpg" alt="Alien Towing RAM 5500 flatbed — We buy junk cars" loading="lazy"></div><div class="cap" data-i18n="ft6">We buy junk cars — Cash today</div></div>
+                <div class="fleet-card" onclick="callNow()"><div class="ph"><img src="assets/fleet-ufo-scene.jpg" alt="Alien Towing truck beamed up by a UFO" loading="lazy"></div><div class="cap" data-i18n="ft5">Branded truck — On scene</div></div>
             </div>
         </div>
     </section>
@@ -444,10 +453,10 @@
             <div class="areas-map-wrap">
                 <div class="areas-grid" id="areasGrid"></div>
                 <div class="map-embed">
-                    <iframe src="https://maps.apple.com/?ll=35.2271,-80.8431&z=10&output=embed&t=m" title="Alien Towing service area map"></iframe>
+                    <div id="serviceMap" role="region" aria-label="Alien Towing service area map — 20 mile radius around Charlotte, NC"></div>
                     <div class="map-note">
                         📍 <span data-i18n="map_note">Charlotte, NC &amp; surroundings —</span>
-                        <a href="https://maps.apple.com/?ll=35.2271,-80.8431&z=10&q=Charlotte" target="_blank" rel="noopener" data-i18n="map_open">Open full map ↗</a>
+                        <a href="https://maps.apple.com/?q=Charlotte%2C%20NC&ll=35.2271,-80.8431&z=10" target="_blank" rel="noopener" data-i18n="map_open">Open full map ↗</a>
                     </div>
                 </div>
             </div>
@@ -499,6 +508,7 @@
         </div>
     </footer>
 
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
     <script>
         /* ============ DATA ============ */
         const PHONES = {
@@ -624,7 +634,7 @@
             const ph = PHONES[lang] || PHONES.en;
             document.querySelectorAll('[data-phone]').forEach(el=>el.textContent=ph.display);
             document.querySelectorAll('[data-phone-link]').forEach(el=>el.href='tel:'+ph.tel);
-            renderVehicles();renderParts();
+            renderVehicles();renderParts();a11yCards();
         }
         function toggleLang(){
             lang = lang==='es'?'en':'es';
@@ -662,11 +672,49 @@
                 `<div class="part-card fade-up" onclick="callNow()"><h4>${x.name}</h4><div class="price">${x.price}</div><div class="tag">${x.condition}</div></div>`
             ).join(''):`<p style="color:var(--text-3)">${d.no_parts} <a href="tel:${tel}" style="color:var(--accent-text)">${d.call_us}</a>.</p>`
         }
-        function searchParts(){renderParts(document.getElementById('partsSearch').value)}
+        function searchParts(){renderParts(document.getElementById('partsSearch').value);a11yCards()}
+        /* map pins for AREA_NAMES — corridors/highways have no single point, so they're chip-only */
+        const HQ=[35.2271,-80.8431];
+        const AREA_COORDS={
+            'Charlotte Uptown':[35.2271,-80.8431],'South End':[35.2126,-80.8593],'Ballantyne':[35.0532,-80.8495],
+            'Pineville':[35.0832,-80.8923],'Matthews':[35.1168,-80.7237],'Waxhaw':[34.9246,-80.7434],
+            'Fort Mill SC':[35.0074,-80.9451],'Rock Hill SC':[34.9249,-81.0251],'Indian Land SC':[34.9935,-80.8506],
+            'Steele Creek':[35.1100,-80.9800],'Lake Wylie':[35.1093,-81.0426],'Cornelius':[35.4868,-80.8601],
+            'Huntersville':[35.4107,-80.8429],'Davidson':[35.4993,-80.8487],'Concord':[35.4088,-80.5795],
+            'Kannapolis':[35.4874,-80.6217],'Gastonia':[35.2621,-81.1873],'Belmont':[35.2429,-81.0373],
+            'Mount Holly':[35.2982,-81.0159]
+        };
+        /* Apple Maps search with the area name as the query, biased to Charlotte */
+        function mapsUrl(a){return `https://maps.apple.com/?q=${encodeURIComponent(a)}&sll=${HQ.join(',')}&z=12`}
+
+        /* chip tap: opens maps (new tab) AND dials */
         function renderAreas(){
             document.getElementById('areasGrid').innerHTML=AREA_NAMES.map(a=>
-                `<a class="area-chip fade-up" href="tel:${CALL_TEL}">${pin()}${a}</a>`
+                `<a class="area-chip fade-up" href="${mapsUrl(a)}" target="_blank" rel="noopener" onclick="callNow()">${pin()}${a}</a>`
             ).join('')
+        }
+        function initMap(){
+            if(!window.L) return;
+            const map=L.map('serviceMap',{scrollWheelZoom:false,attributionControl:true}).setView(HQ,10);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; OpenStreetMap'}).addTo(map);
+            const ring=L.circle(HQ,{radius:32187,color:'#30d158',weight:2,fillColor:'#30d158',fillOpacity:.1}).addTo(map); /* 20 mi */
+            map.fitBounds(ring.getBounds(),{padding:[8,8]});
+            L.marker(HQ,{icon:L.divIcon({className:'',html:'<div class="map-hq">🛸</div>',iconSize:[26,26],iconAnchor:[13,13]}),zIndexOffset:1000})
+                .addTo(map).bindPopup(`<strong>Alien Towing</strong><br>Charlotte, NC · 20 mi radius<br><a href="tel:${CALL_TEL}">📞 (704) 606-3696</a>`);
+            const dot=L.divIcon({className:'',html:'<div class="map-pin"></div>',iconSize:[12,12],iconAnchor:[6,6]});
+            Object.entries(AREA_COORDS).forEach(([a,ll])=>{
+                if(a==='Charlotte Uptown') return;
+                L.marker(ll,{icon:dot,title:a}).addTo(map)
+                    .bindPopup(`<strong>${a}</strong><br><a href="${mapsUrl(a)}" target="_blank" rel="noopener">Open in Maps ↗</a> · <a href="tel:${CALL_TEL}">📞 Call</a>`);
+            });
+        }
+        /* make onclick cards keyboard-reachable + reveal re-rendered vehicle/part cards */
+        function a11yCards(){
+            if(typeof obs!=='undefined') document.querySelectorAll('.vehicle-card:not(.visible),.part-card:not(.visible)').forEach(e=>obs.observe(e));
+            document.querySelectorAll('[onclick="callNow()"]:not(a):not(button)').forEach(el=>{
+                if(el.tabIndex<0){el.tabIndex=0;el.setAttribute('role','link')}
+                if(!el.dataset.kb){el.dataset.kb=1;el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();callNow()}})}
+            });
         }
         function renderTestimonials(){
             const cards=TESTIMONIALS.map(t=>
@@ -726,7 +774,7 @@
         document.querySelectorAll('.fade-up,.service-card,.vehicle-card,.part-card,.fleet-card,.area-chip').forEach(e=>obs.observe(e));
 
         /* ============ INIT ============ */
-        applyTheme();applyLang();renderAreas();renderTestimonials();
+        applyTheme();applyLang();renderAreas();renderTestimonials();initMap();a11yCards();
         setTimeout(()=>{document.querySelectorAll('.fade-up,.service-card,.vehicle-card,.part-card,.fleet-card,.area-chip').forEach(e=>{if(!e.classList.contains('visible'))obs.observe(e)})},200);
     </script>
 </body>
