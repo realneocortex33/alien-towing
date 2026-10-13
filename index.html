@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,7 +38,7 @@
         button{font-family:inherit}
 
         .container{max-width:1200px;margin:0 auto;padding:0 24px}
-        .section{padding:100px 0;position:relative}
+        .section{padding:48px 0;position:relative}
         .section-label{font-size:.75rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-3);font-weight:600;margin-bottom:12px}
         .section-title{font-size:clamp(2rem,4vw,3rem);font-weight:600;letter-spacing:-.02em;line-height:1.15;margin-bottom:20px}
         .section-sub{font-size:1.1rem;color:var(--text-2);max-width:620px;margin-bottom:56px;font-weight:400}
@@ -81,9 +81,9 @@
         .lead-modal input::placeholder{color:var(--text-3)}
         .lead-modal .btn{width:100%;justify-content:center}
 
-        .hero{min-height:100vh;display:flex;align-items:center;background:var(--bg);padding-top:100px;overflow:hidden;position:relative}
+        .hero{min-height:88vh;display:flex;align-items:center;background:var(--bg);padding-top:76px;padding-bottom:32px;overflow:hidden;position:relative}
         .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 85% 15%,var(--accent-bg),transparent 45%);pointer-events:none;opacity:.6}
-        .hero>.container{display:flex;align-items:center;gap:56px;position:relative}
+        .hero>.container{display:flex;align-items:center;gap:40px;position:relative}
         .hero-content{flex:1;min-width:300px}
         .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 16px;border-radius:100px;background:var(--card-2);border:1px solid var(--border);font-size:.78rem;font-weight:500;color:var(--text-2);margin-bottom:20px}
         .hero-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:blink 1.6s infinite}
@@ -92,7 +92,7 @@
         .hero h1 .accent{color:var(--accent-text)}
         .hero p{font-size:1.1rem;color:var(--text-2);max-width:480px;margin-bottom:28px}
         .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
-        .hero-stats{display:flex;gap:36px;margin-top:44px;padding-top:28px;border-top:1px solid var(--border)}
+        .hero-stats{display:flex;gap:28px;margin-top:28px;padding-top:20px;border-top:1px solid var(--border)}
         .hero-stat h3{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
         .hero-stat p{font-size:.8rem;color:var(--text-3);margin:0}
         .hero-visual{flex:1;max-width:540px;position:relative}
@@ -131,8 +131,8 @@
         .benefit .sub{color:var(--text-3);font-size:.82rem}
 
         #services{background:var(--bg-alt)}
-        .services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
-        .service-card{padding:30px;border-radius:16px;background:var(--card);border:1px solid var(--border);transition:all .3s;opacity:0;transform:translateY(16px)}
+        .services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+        .service-card{cursor:pointer;padding:22px;border-radius:16px;background:var(--card);border:1px solid var(--border);transition:all .3s;opacity:0;transform:translateY(16px)}
         .service-card.visible{opacity:1;transform:translateY(0)}
         .service-card:hover{border-color:var(--accent);box-shadow:0 10px 36px var(--shadow)}
         .service-card .icon{font-size:1.7rem;margin-bottom:14px}
@@ -141,8 +141,8 @@
         .service-card .tag{display:inline-block;margin-top:12px;padding:3px 12px;border-radius:100px;font-size:.72rem;font-weight:600;background:var(--card-2);color:var(--text-2);border:1px solid var(--border)}
         .service-card .tag.accent{background:var(--accent-bg);color:var(--accent-text);border-color:transparent}
 
-        .fleet-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(340px,100%),1fr));gap:18px}
-        .fleet-card{display:flex;flex-direction:column;border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--border);transition:all .3s;opacity:0;transform:translateY(16px)}
+        .fleet-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(340px,100%),1fr));gap:12px}
+        .fleet-card{cursor:pointer;display:flex;flex-direction:column;border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--border);transition:all .3s;opacity:0;transform:translateY(16px)}
         .fleet-card.visible{opacity:1;transform:translateY(0)}
         .fleet-card:hover{box-shadow:0 10px 36px var(--shadow);border-color:var(--border-2)}
         .fleet-card .ph{aspect-ratio:4/3;overflow:hidden;background:var(--card-2)}
@@ -167,7 +167,7 @@
         #areas{background:var(--bg-alt)}
         .areas-map-wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:start}
         .areas-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;align-content:start}
-        .area-chip{display:flex;align-items:center;justify-content:center;gap:6px;padding:10px 12px;border-radius:10px;background:var(--card);border:1px solid var(--border);text-align:center;font-weight:500;font-size:.8rem;color:var(--text-2);transition:all .2s}
+        .area-chip{cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px 12px;border-radius:10px;background:var(--card);border:1px solid var(--border);text-align:center;font-weight:500;font-size:.8rem;color:var(--text-2);transition:all .2s}
         .area-chip:hover{background:var(--accent-bg);border-color:var(--accent);color:var(--accent-text)}
         .area-chip svg{width:12px;height:12px;opacity:.6}
         .map-embed{position:sticky;top:90px;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:var(--card)}
@@ -178,8 +178,8 @@
 
         /* vehicles + parts at BOTTOM of page */
         #vehicles{background:var(--bg)}
-        .vehicle-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:18px}
-        .vehicle-card{display:flex;flex-direction:column;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:var(--card);transition:all .3s;opacity:0;transform:translateY(16px)}
+        .vehicle-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:12px}
+        .vehicle-card{cursor:pointer;display:flex;flex-direction:column;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:var(--card);transition:all .3s;opacity:0;transform:translateY(16px)}
         .vehicle-card.visible{opacity:1;transform:translateY(0)}
         .vehicle-card:hover{box-shadow:0 10px 36px var(--shadow)}
         .vehicle-img{aspect-ratio:16/10;background:var(--card-2);display:flex;align-items:center;justify-content:center;color:var(--text-3);font-size:.85rem;position:relative;border-bottom:1px solid var(--border);overflow:hidden}
@@ -197,12 +197,12 @@
         .vehicle-info .btn{width:100%;justify-content:center;margin-top:auto}
 
         #parts{background:var(--bg-alt)}
-        .parts-search{display:flex;gap:10px;margin-bottom:40px;flex-wrap:wrap}
+        .parts-search{display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap}
         .parts-search input{flex:1;min-width:200px;padding:13px 16px;border-radius:10px;border:1.5px solid var(--border-2);background:var(--input-bg);color:var(--text);font-size:.95rem;outline:none;transition:border-color .25s}
         .parts-search input:focus{border-color:var(--accent)}
         .parts-search input::placeholder{color:var(--text-3)}
-        .parts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(240px,100%),1fr));gap:12px}
-        .part-card{display:flex;flex-direction:column;gap:12px;padding:18px;border-radius:12px;background:var(--card);border:1px solid var(--border);transition:all .2s;opacity:0;transform:translateY(12px)}
+        .parts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(240px,100%),1fr));gap:10px}
+        .part-card{cursor:pointer;display:flex;flex-direction:column;gap:12px;padding:18px;border-radius:12px;background:var(--card);border:1px solid var(--border);transition:all .2s;opacity:0;transform:translateY(12px)}
         .part-card.visible{opacity:1;transform:translateY(0)}
         .part-card:hover{border-color:var(--accent);box-shadow:0 8px 28px var(--shadow)}
         .part-card h4{font-size:.88rem;font-weight:600;line-height:1.4}
@@ -210,7 +210,7 @@
         .part-card .price{color:var(--accent-text);font-weight:700;font-size:1.15rem;letter-spacing:-.01em;white-space:nowrap}
         .part-card .tag{font-size:.7rem;font-weight:600;color:var(--text-2);background:var(--card-2);border:1px solid var(--border);padding:3px 10px;border-radius:100px;text-align:right;line-height:1.4}
 
-        .cta-section{background:var(--text);color:var(--bg);padding:76px 0;text-align:center;position:relative;overflow:hidden}
+        .cta-section{background:var(--text);color:var(--bg);padding:48px 0;text-align:center;position:relative;overflow:hidden}
         .cta-section h2{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:700;letter-spacing:-.02em;margin-bottom:10px}
         .cta-section p{font-size:1rem;opacity:.7;margin-bottom:24px}
         .cta-section .btn{background:var(--accent);color:#fff}
@@ -247,7 +247,7 @@
             .nav-toggle{display:flex}
         }
         @media(max-width:600px){
-            .section{padding:60px 0}
+            .section{padding:36px 0}
             .lead-modal-box{padding:32px 24px}
             .booking-form .row{grid-template-columns:1fr}
             .booking-form{padding:26px 20px}
@@ -396,12 +396,12 @@
             <h2 class="section-title fade-up" data-i18n="t_services">What we do</h2>
             <p class="section-sub fade-up" data-i18n="s_services">Full-spectrum towing and recovery. One call, one truck, done.</p>
             <div class="services-grid">
-                <div class="service-card"><div class="icon">🚛</div><h3 data-i18n="sv1_t">Flatbed Towing</h3><p data-i18n="sv1_d">Safe, damage-free transport for all vehicles. No dragging, no scratches — secure loading and delivery every time.</p><span class="tag accent" data-i18n="sv1_tag">Most requested</span></div>
-                <div class="service-card"><div class="icon">🛡️</div><h3 data-i18n="sv2_t">Heavy-Duty Recovery</h3><p data-i18n="sv2_d">Class 3–8 trucks, buses, equipment. Our RAM 5500 handles anything you throw at it with precision and power.</p><span class="tag" data-i18n="sv2_tag">24/7</span></div>
-                <div class="service-card"><div class="icon">⚡</div><h3 data-i18n="sv3_t">Roadside Assistance</h3><p data-i18n="sv3_d">Dead battery? Locked keys? Flat tire? Fuel delivery? We're there in 1-5 minutes with everything needed to get you moving.</p><span class="tag accent" data-i18n="sv3_tag">Emergency</span></div>
-                <div class="service-card"><div class="icon">🏎️</div><h3 data-i18n="sv4_t">Luxury Transport</h3><p data-i18n="sv4_d">Classic cars, exotics, low-clearance vehicles. Soft straps, white gloves, zero miles on your odometer.</p><span class="tag" data-i18n="sv4_tag">Enclosed available</span></div>
-                <div class="service-card"><div class="icon">🔄</div><h3 data-i18n="sv5_t">Long-Distance Towing</h3><p data-i18n="sv5_d">Need a car moved across state lines? Competitive rates, real-time tracking, transparent pricing.</p></div>
-                <div class="service-card"><div class="icon">💵</div><h3 data-i18n="sv6_t">We Buy Junk Cars</h3><p data-i18n="sv6_d">Got a vehicle taking up space? We'll buy it on the spot, tow it free, and handle all the paperwork.</p><span class="tag accent" data-i18n="sv6_tag">Cash today</span></div>
+                <div class="service-card" onclick="callNow()"><div class="icon">🚛</div><h3 data-i18n="sv1_t">Flatbed Towing</h3><p data-i18n="sv1_d">Safe, damage-free transport for all vehicles. No dragging, no scratches — secure loading and delivery every time.</p><span class="tag accent" data-i18n="sv1_tag">Most requested</span></div>
+                <div class="service-card" onclick="callNow()"><div class="icon">🛡️</div><h3 data-i18n="sv2_t">Heavy-Duty Recovery</h3><p data-i18n="sv2_d">Class 3–8 trucks, buses, equipment. Our RAM 5500 handles anything you throw at it with precision and power.</p><span class="tag" data-i18n="sv2_tag">24/7</span></div>
+                <div class="service-card" onclick="callNow()"><div class="icon">⚡</div><h3 data-i18n="sv3_t">Roadside Assistance</h3><p data-i18n="sv3_d">Dead battery? Locked keys? Flat tire? Fuel delivery? We're there in 1-5 minutes with everything needed to get you moving.</p><span class="tag accent" data-i18n="sv3_tag">Emergency</span></div>
+                <div class="service-card" onclick="callNow()"><div class="icon">🏎️</div><h3 data-i18n="sv4_t">Luxury Transport</h3><p data-i18n="sv4_d">Classic cars, exotics, low-clearance vehicles. Soft straps, white gloves, zero miles on your odometer.</p><span class="tag" data-i18n="sv4_tag">Enclosed available</span></div>
+                <div class="service-card" onclick="callNow()"><div class="icon">🔄</div><h3 data-i18n="sv5_t">Long-Distance Towing</h3><p data-i18n="sv5_d">Need a car moved across state lines? Competitive rates, real-time tracking, transparent pricing.</p></div>
+                <div class="service-card" onclick="callNow()"><div class="icon">💵</div><h3 data-i18n="sv6_t">We Buy Junk Cars</h3><p data-i18n="sv6_d">Got a vehicle taking up space? We'll buy it on the spot, tow it free, and handle all the paperwork.</p><span class="tag accent" data-i18n="sv6_tag">Cash today</span></div>
             </div>
         </div>
     </section>
@@ -413,12 +413,12 @@
             <h2 class="section-title fade-up" data-i18n="t_fleet">Meet the trucks</h2>
             <p class="section-sub fade-up" data-i18n="s_fleet">Real trucks. Real work. Ready for anything.</p>
             <div class="fleet-grid">
-                <div class="fleet-card"><img src="assets/fleet-ram5500-loaded.png" alt="RAM 5500 heavy duty"><div class="cap" data-i18n="ft1">RAM 5500 — Loaded & ready</div></div>
-                <div class="fleet-card"><img src="assets/fleet-ram2500-action.png" alt="Tow truck with purple sedan"><div class="cap" data-i18n="ft2">RAM 2500 — On the job</div></div>
-                <div class="fleet-card"><img src="assets/fleet-dodge-flatbed.jpg" alt="RAM 3500 towing blue car"><div class="cap" data-i18n="ft3">Dodge Flatbed — Ready to roll</div></div>
-                <div class="fleet-card"><img src="assets/fleet-flatbed-suv.jpg" alt="Dodge flatbed in the yard"><div class="cap" data-i18n="ft4">Flatbed — SUV recovery</div></div>
-                <div class="fleet-card"><img src="assets/fleet-branded-suv.png" alt="Tow truck roadside"><div class="cap" data-i18n="ft5">Branded truck — On scene</div></div>
-                <div class="fleet-card"><img src="assets/fleet-junk-cars.jpg" alt="We buy junk cars"><div class="cap" data-i18n="ft6">We buy junk cars — Cash today</div></div>
+                <div class="fleet-card" onclick="callNow()"><img src="assets/fleet-ram5500-loaded.png" alt="RAM 5500 heavy duty"><div class="cap" data-i18n="ft1">RAM 5500 — Loaded & ready</div></div>
+                <div class="fleet-card" onclick="callNow()"><img src="assets/fleet-ram2500-action.png" alt="Tow truck with purple sedan"><div class="cap" data-i18n="ft2">RAM 2500 — On the job</div></div>
+                <div class="fleet-card" onclick="callNow()"><img src="assets/fleet-dodge-flatbed.jpg" alt="RAM 3500 towing blue car"><div class="cap" data-i18n="ft3">Dodge Flatbed — Ready to roll</div></div>
+                <div class="fleet-card" onclick="callNow()"><img src="assets/tow-suv.jpg" alt="Dodge flatbed in the yard"><div class="cap" data-i18n="ft4">Flatbed — SUV recovery</div></div>
+                <div class="fleet-card" onclick="callNow()"><img src="assets/fleet-ufo-scene.jpg" alt="Tow truck roadside"><div class="cap" data-i18n="ft5">Branded truck — On scene</div></div>
+                <div class="fleet-card" onclick="callNow()"><img src="assets/fleet-junk-cars.jpg" alt="We buy junk cars"><div class="cap" data-i18n="ft6">We buy junk cars — Cash today</div></div>
             </div>
         </div>
     </section>
@@ -595,7 +595,7 @@
 
         /* ============ STATE ============ */
         let lang = localStorage.getItem('lang') || 'en';
-        let theme = localStorage.getItem('theme') || 'light';
+        let theme = localStorage.getItem('theme') || 'dark';
 
         function applyTheme(){
             document.documentElement.setAttribute('data-theme',theme);
@@ -632,22 +632,24 @@
             applyLang();
         }
 
+        /* card/chip taps always dial 606-3696 */
+        const CALL_TEL='+17046063696';
+        function callNow(){location.href='tel:'+CALL_TEL}
+
         /* ============ RENDER ============ */
         function pin(){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>'}
-        function mapUrl(area){return 'https://maps.apple.com/?q='+encodeURIComponent(area+', NC')}
         const dict=()=>I18N[lang]||I18N.en;
 
         function renderVehicles(){
             const d=dict();
-            const ph=(PHONES[lang]||PHONES.en).display;
             document.getElementById('vehicleGrid').innerHTML=VEHICLES.map(v=>
-                `<div class="vehicle-card fade-up">
+                `<div class="vehicle-card fade-up" onclick="callNow()">
                     <div class="vehicle-img">${v.img?`<img src="assets/${v.img}" alt="${v.name}">`:`<span>${v.color}</span>`}<span class="badge ${v.sold?'sold':'avail'}">${v.sold?d.sold:d.avail}</span></div>
                     <div class="vehicle-info">
                         <h3>${v.name}</h3>
                         <div class="price">${v.price}</div>
                         <div class="specs"><span>📏 ${v.miles}</span><span>⚙️ ${v.engine}</span><span>🎨 ${v.color}</span></div>
-                        <button class="btn btn-accent" onclick="alert('${d.inquire}: ${ph}')">${v.sold?d.view_similar:d.inquire}</button>
+                        <button class="btn btn-accent">${v.sold?d.view_similar:d.inquire}</button>
                     </div>
                 </div>`
             ).join('')
@@ -657,13 +659,13 @@
             const p=f?PARTS.filter(x=>x.name.toLowerCase().includes(f.toLowerCase())):PARTS;
             const tel=(PHONES[lang]||PHONES.en).tel;
             document.getElementById('partsGrid').innerHTML=p.length?p.map(x=>
-                `<div class="part-card fade-up"><h4>${x.name}</h4><div class="price">${x.price}</div><div class="tag">${x.condition}</div></div>`
+                `<div class="part-card fade-up" onclick="callNow()"><h4>${x.name}</h4><div class="price">${x.price}</div><div class="tag">${x.condition}</div></div>`
             ).join(''):`<p style="color:var(--text-3)">${d.no_parts} <a href="tel:${tel}" style="color:var(--accent-text)">${d.call_us}</a>.</p>`
         }
         function searchParts(){renderParts(document.getElementById('partsSearch').value)}
         function renderAreas(){
             document.getElementById('areasGrid').innerHTML=AREA_NAMES.map(a=>
-                `<a class="area-chip fade-up" href="${mapUrl(a)}" target="_blank" rel="noopener">${pin()}${a}</a>`
+                `<a class="area-chip fade-up" href="tel:${CALL_TEL}">${pin()}${a}</a>`
             ).join('')
         }
         function renderTestimonials(){
