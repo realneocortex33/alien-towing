@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Alien Towing — Charlotte NC | 24/7 Emergency Towing</title>
+    <meta name="description" content="Broken down in Charlotte? We'll be there in 1-5 minutes. 24/7 emergency towing, roadside assistance. Call now — (704) 605-1318">
+    <meta name="robots" content="noindex, follow">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛸</text></svg>">
+    <style>
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        html{scroll-behavior:smooth}
+        body{
+            font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+            background:#000;color:#f5f5f7;line-height:1.5;
+            -webkit-font-smoothing:antialiased;
+        }
+        a{color:inherit;text-decoration:none}
+        img{max-width:100%;height:auto;display:block}
+
+        /* Emergency strip */
+        .emergency-bar{
+            background:#2d8a4e;color:#fff;text-align:center;
+            padding:10px 16px;font-size:.8rem;font-weight:600;
+            letter-spacing:1px;text-transform:uppercase;
+            animation:pulse-bg 2s ease-in-out infinite;
+        }
+        @keyframes pulse-bg{0%,100%{background:#2d8a4e}50%{background:#22863a}}
+
+        .container{max-width:680px;margin:0 auto;padding:0 20px}
+
+        /* Hero */
+        .hero{
+            min-height:100vh;display:flex;flex-direction:column;
+            justify-content:center;position:relative;overflow:hidden;
+            background:radial-gradient(ellipse at 50% 0%, #1a3a1a, #000 60%);
+            text-align:center;padding:80px 0 60px;
+        }
+        .hero-badge{
+            display:inline-flex;align-items:center;gap:8px;
+            padding:6px 14px;border-radius:100px;
+            background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);
+            font-size:.75rem;font-weight:500;color:rgba(255,255,255,.7);
+            margin-bottom:24px;
+        }
+        .hero-badge .dot{width:8px;height:8px;border-radius:50%;background:#30d158;animation:blink 1.6s infinite}
+        @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+        .hero h1{
+            font-size:clamp(2rem,6vw,3.2rem);font-weight:700;
+            letter-spacing:-.03em;line-height:1.05;margin-bottom:12px;
+        }
+        .hero h1 .accent{color:#30d158}
+        .hero p{font-size:1rem;color:rgba(255,255,255,.6);max-width:440px;margin:0 auto 28px}
+
+        .phone-number{
+            display:inline-block;font-size:clamp(1.6rem,4vw,2.2rem);
+            font-weight:800;color:#fff;letter-spacing:-.02em;
+            margin-bottom:8px;
+        }
+        .phone-hint{font-size:.8rem;color:rgba(255,255,255,.4);margin-bottom:20px}
+
+        .btn-call{
+            display:flex;align-items:center;justify-content:center;gap:10px;
+            width:100%;max-width:380px;margin:0 auto 12px;
+            padding:18px 24px;border-radius:100px;
+            background:#30d158;color:#000;
+            font-size:1.15rem;font-weight:700;
+            border:none;cursor:pointer;
+            transition:all .2s;
+        }
+        .btn-call:hover{background:#34d85a;transform:translateY(-1px)}
+        .btn-call:active{transform:translateY(0)}
+        .btn-call .icon{font-size:1.3rem}
+
+        .trust-row{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-top:32px}
+        .trust-item{display:flex;align-items:center;gap:6px;font-size:.78rem;color:rgba(255,255,255,.45);font-weight:500}
+        .trust-item .check{color:#30d158;font-weight:700}
+
+        .hero-stats{display:flex;justify-content:center;gap:32px;margin-top:36px;flex-wrap:wrap}
+        .hero-stat{text-align:center}
+        .hero-stat h3{font-size:1.3rem;font-weight:700;color:#30d158}
+        .hero-stat p{font-size:.75rem;color:rgba(255,255,255,.4);margin:0;text-transform:uppercase;letter-spacing:1px}
+
+        .ufo{position:absolute;top:20px;right:20px;font-size:2rem;opacity:.15;animation:floaty 6s ease-in-out infinite;pointer-events:none}
+        @keyframes floaty{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-14px) rotate(6deg)}}
+
+        /* Content sections */
+        .section{padding:60px 0}
+        .section-dark{background:#0a0a0c}
+        .section h2{font-size:1.4rem;font-weight:700;letter-spacing:-.02em;margin-bottom:8px}
+        .section > .container > p{color:rgba(255,255,255,.5);font-size:.9rem;margin-bottom:28px}
+
+        .benefits-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+        .benefit-card{
+            padding:18px;border-radius:12px;
+            background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);
+        }
+        .benefit-card .icon{font-size:1.3rem;margin-bottom:6px}
+        .benefit-card h3{font-size:.88rem;font-weight:600;margin-bottom:3px}
+        .benefit-card p{font-size:.78rem;color:rgba(255,255,255,.45)}
+
+        /* Form */
+        .lead-form-wrap{
+            max-width:440px;margin:0 auto;
+            padding:28px 24px;border-radius:16px;
+            background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+        }
+        .lead-form-wrap h3{font-size:1.1rem;font-weight:600;margin-bottom:4px}
+        .lead-form-wrap>p{font-size:.82rem;color:rgba(255,255,255,.5);margin-bottom:18px}
+        .lead-form input{
+            width:100%;padding:14px 16px;margin-bottom:10px;
+            border-radius:10px;border:1.5px solid rgba(255,255,255,.12);
+            background:rgba(255,255,255,.06);color:#fff;
+            font-size:.95rem;outline:none;transition:border-color .25s;
+        }
+        .lead-form input:focus{border-color:#30d158}
+        .lead-form input::placeholder{color:rgba(255,255,255,.3)}
+        .lead-form .gps-btn{
+            background:rgba(255,255,255,.08);color:#34d85a;border:1px solid rgba(48,209,88,.4);
+            padding:8px;border-radius:10px;font-size:.8rem;cursor:pointer;margin-bottom:10px;width:100%;
+        }
+        .lead-form .gps-btn:hover{background:rgba(255,255,255,.15)}
+        .lead-form .btn-submit{
+            width:100%;padding:16px;border-radius:100px;
+            background:#30d158;color:#000;
+            font-size:1rem;font-weight:700;
+            border:none;cursor:pointer;
+            transition:all .2s;
+        }
+        .lead-form .btn-submit:hover{background:#34d85a}
+
+        .or-call{text-align:center;margin-top:14px;font-size:.82rem;color:rgba(255,255,255,.4)}
+        .or-call a{color:#30d158;font-weight:700}
+
+        .service-list{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+        .service-item{
+            padding:12px 14px;border-radius:10px;
+            background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);
+            font-size:.82rem;font-weight:500;
+            display:flex;align-items:center;gap:8px;
+        }
+
+        .area-grid{display:flex;flex-wrap:wrap;gap:6px}
+        .area-chip{
+            padding:6px 12px;border-radius:100px;
+            background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+            font-size:.75rem;color:rgba(255,255,255,.5);
+        }
+
+        /* CTA footer */
+        .cta-bar{
+            position:fixed;left:0;right:0;bottom:0;z-index:100;
+            padding:12px 16px;padding-bottom:max(12px,env(safe-area-inset-bottom));
+            background:rgba(0,0,0,.95);backdrop-filter:blur(20px);
+            border-top:1px solid rgba(255,255,255,.08);
+            display:flex;gap:10px;align-items:center;
+        }
+        .cta-bar .cta-phone{
+            flex:1;display:flex;align-items:center;justify-content:center;gap:8px;
+            padding:14px;border-radius:100px;
+            background:#30d158;color:#000;
+            font-weight:700;font-size:1.05rem;
+        }
+        .cta-bar .cta-phone .icon{font-size:1.2rem}
+        .cta-bar .cta-form-btn{
+            padding:14px 18px;border-radius:100px;
+            background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);
+            color:#fff;font-size:.85rem;font-weight:600;
+            white-space:nowrap;cursor:pointer;
+        }
+        body{padding-bottom:80px}
+
+        @media(max-width:500px){
+            .benefits-grid{grid-template-columns:1fr}
+            .service-list{grid-template-columns:1fr}
+            .hero h1{font-size:1.8rem}
+            .hero-stats{gap:20px}
+        }
+
+        /* Loading spinner */
+        .spinner{display:none;width:18px;height:18px;border:2px solid rgba(0,0,0,.2);border-top-color:#000;border-radius:50%;animation:spin .6s linear infinite;margin:0 auto}
+        @keyframes spin{to{transform:rotate(360deg)}}
+
+        /* Success state */
+        .success-msg{display:none;text-align:center;padding:20px}
+        .success-msg .icon{font-size:2.4rem;margin-bottom:8px}
+        .success-msg h3{font-size:1.1rem;font-weight:700;margin-bottom:4px}
+        .success-msg p{font-size:.85rem;color:rgba(255,255,255,.5)}
+    </style>
+</head>
+<body>
+
+    <!-- Emergency bar -->
+    <div class="emergency-bar">🚨 24/7 Emergency Towing — Charlotte NC</div>
+
+    <div class="ufo">🛸</div>
+
+    <!-- HERO — the whole point -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-badge"><span class="dot"></span> We'll be there in 1-5 minutes</div>
+            <h1>Broken down in <span class="accent">Charlotte</span>?<br>We're on the way. 🛸</h1>
+            <p>Real person answers. Real truck rolls. No voicemail, no runaround, no hidden fees.</p>
+
+            <a href="tel:+17046051318" class="phone-number">(704) 605-1318</a>
+            <div class="phone-hint">Tap to call — available 24/7</div>
+
+            <a href="tel:+17046051318" class="btn-call">
+                <span class="icon">📞</span> Call Now — (704) 605-1318
+            </a>
+
+            <div class="trust-row">
+                <span class="trust-item"><span class="check">✓</span> Licensed & Insured</span>
+                <span class="trust-item"><span class="check">✓</span> USDOT #4568462</span>
+                <span class="trust-item"><span class="check">✓</span> 24/7 Dispatch</span>
+            </div>
+
+            <div class="hero-stats">
+                <div class="hero-stat"><h3>&lt;20</h3><p>Min Response</p></div>
+                <div class="hero-stat"><h3>24/7</h3><p>Always On Call</p></div>
+                <div class="hero-stat"><h3>100%</h3><p>Licensed</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why call us -->
+    <section class="section section-dark">
+        <div class="container">
+            <h2>Why Charlotte calls Alien Towing</h2>
+            <p>Fast, fair, and human. Every time.</p>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="icon">⏱️</div>
+                    <h3>20-Min Response</h3>
+                    <p>Average across Charlotte. We're close and we're fast.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon">💰</div>
+                    <h3>Upfront Pricing</h3>
+                    <p>You approve the quote before we roll. No surprises.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon">🛡️</div>
+                    <h3>Licensed & Insured</h3>
+                    <p>Full commercial coverage. Your vehicle is protected.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon">📞</div>
+                    <h3>Live Dispatch</h3>
+                    <p>Real person answers. Not a voicemail, not a bot.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="section">
+        <div class="container">
+            <h2>What we do</h2>
+            <p>One call handles it all.</p>
+            <div class="service-list">
+                <div class="service-item">🚛 Flatbed Towing</div>
+                <div class="service-item">🛡️ Heavy-Duty Recovery</div>
+                <div class="service-item">⚡ Roadside Assistance</div>
+                <div class="service-item">🏎️ Luxury Transport</div>
+                <div class="service-item">🔄 Long-Distance Towing</div>
+                <div class="service-item">💵 We Buy Junk Cars</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lead form (backup if they don't call) -->
+    <section class="section section-dark" id="callback">
+        <div class="container">
+            <div class="lead-form-wrap">
+                <h3>Prefer a call back? 🚨</h3>
+                <p>Drop your name & number — we call you back within minutes.</p>
+                <form class="lead-form" id="adLeadForm">
+                    <input type="text" name="name" placeholder="Your name" autocomplete="name" required>
+                    <input type="tel" name="phone" placeholder="Phone number" autocomplete="tel" required>
+                    <input type="text" name="location" placeholder="Where is the vehicle right now?" autocomplete="address-line1">
+                    <button type="button" class="btn-submit gps-btn" onclick="getLocation()">📍 Use my location</button>
+                    <button type="submit" class="btn-submit" id="adLeadBtn">
+                        <span id="adLeadText">☎ We'll Call You</span>
+                        <span class="spinner" id="adLeadSpinner"></span>
+                    </button>
+                </form>
+                <div class="success-msg" id="adLeadSuccess">
+                    <div class="icon">✅</div>
+                    <h3>Got it!</h3>
+                    <p>We'll call you back in minutes. If it's an emergency, call now instead.</p>
+                    <a href="tel:+17046051318" style="display:inline-block;margin-top:12px;padding:10px 20px;border-radius:100px;background:#30d158;color:#000;font-weight:700;font-size:.9rem">📞 Call Now</a>
+                </div>
+                <div class="or-call">Prefer to talk now? <a href="tel:+17046051318">Call (704) 605-1318</a></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service areas -->
+    <section class="section">
+        <div class="container">
+            <h2>Where we serve</h2>
+            <p>Greater Charlotte and surrounding areas. 24/7.</p>
+            <div class="area-grid">
+                <span class="area-chip">Charlotte Uptown</span>
+                <span class="area-chip">South End</span>
+                <span class="area-chip">Ballantyne</span>
+                <span class="area-chip">Pineville</span>
+                <span class="area-chip">Matthews</span>
+                <span class="area-chip">Waxhaw</span>
+                <span class="area-chip">Fort Mill SC</span>
+                <span class="area-chip">Rock Hill SC</span>
+                <span class="area-chip">Steele Creek</span>
+                <span class="area-chip">Lake Wylie</span>
+                <span class="area-chip">Cornelius</span>
+                <span class="area-chip">Huntersville</span>
+                <span class="area-chip">Davidson</span>
+                <span class="area-chip">Concord</span>
+                <span class="area-chip">Gastonia</span>
+                <span class="area-chip">I-485 Corridor</span>
+                <span class="area-chip">I-77 Corridor</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA bar (fixed bottom) -->
+    <div class="cta-bar">
+        <a href="tel:+17046051318" class="cta-phone">
+            <span class="icon">📞</span> Call Now — (704) 605-1318
+        </a>
+        <button class="cta-form-btn" onclick="document.getElementById('callback').scrollIntoView({behavior:'smooth'})">✉️ Form</button>
+    </div>
+
+    <script>
+        // Track conversions — simple event logging
+    function getLocation(){
+        if(!navigator.geolocation) return;
+        navigator.geolocation.getCurrentPosition(async pos=>{
+            try{
+                const res = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&format=json`);
+                const data = await res.json();
+                const el = document.querySelector('[name="location"]');
+                if(el) el.value = (data.displayName||'').split(',').slice(0,2).join(',') || 'Charlotte NC';
+            }catch(e){}
+        });
+    }
+    // Capture ad click params for lead tracking
+    const adParams = new URLSearchParams(window.location.search);
+    const utmCampaign = adParams.get('utm_campaign') || '';
+    const gclid = adParams.get('gclid') || '';
+    document.getElementById('adLeadForm').addEventListener('submit', function(e){
+            e.preventDefault();
+            const btn = document.getElementById('adLeadBtn');
+            const text = document.getElementById('adLeadText');
+            const spinner = document.getElementById('adLeadSpinner');
+            const success = document.getElementById('adLeadSuccess');
+            const data = Object.fromEntries(new FormData(this));
+
+            // Show loading
+            text.style.display = 'none';
+            spinner.style.display = 'block';
+            btn.disabled = true;
+
+            // Deliver lead to Telegram
+            fetch('https://api.telegram.org/bot8861182350:AAEjo69clBvM-Ycta-Aa9GxDJqGVuFAMOok/sendMessage', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    chat_id: '8102384229',
+                    text: `🚨 NEW LEAD — Alien Towing\n\nName: ${data.name}\nPhone: ${data.phone}\nLocation: ${data.location || '—'}\nSource: Google Ads\nAd: ${utmCampaign || 'search'}${gclid ? '\nGCLID: '+gclid : ''}`
+                })
+            }).catch(() => {});
+            // Also log locally
+            try{fetch('http://localhost:8001/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({form:'ad-landing-form',...data,source:'google-ads',ts:new Date().toISOString()})}).catch(()=>{})}catch(e){}
+
+            // Show success
+            setTimeout(() => {
+                btn.style.display = 'none';
+                success.style.display = 'block';
+            }, 500);
+        });
+    </script>
+</body>
+</html>

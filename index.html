@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alien Towing — Charlotte's Premium Towing & Recovery</title>
+    <meta name="description" content="24/7 professional towing, roadside assistance, and recovery in Charlotte NC">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛸</text></svg>">
+    <style>
+        :root{
+            --bg:#fff;--bg-alt:#f5f5f7;--card:#fff;--card-2:#fafafa;
+            --border:#e5e5e5;--border-2:#d4d4d4;
+            --text:#1d1d1f;--text-2:#6e6e73;--text-3:#86868b;
+            --accent:#1e8449;--accent-bg:#e8f3e8;--accent-text:#1e8449;
+            --accent-grad:linear-gradient(135deg,#1e8449,#34d85a);
+            --nav-bg:rgba(255,255,255,.85);
+            --shadow:rgba(0,0,0,.05);
+            --input-bg:#fafafa;
+        }
+        [data-theme="dark"]{
+            --bg:#000;--bg-alt:#0a0a0c;--card:#141416;--card-2:#1c1c1e;
+            --border:#26262a;--border-2:#3a3a3c;
+            --text:#f5f5f7;--text-2:#a1a1a6;--text-3:#6e6e73;
+            --accent:#34d85a;--accent-bg:rgba(48,209,88,.12);--accent-text:#34d85a;
+            --accent-grad:linear-gradient(135deg,#2d8a4e,#34d85a);
+            --nav-bg:rgba(0,0,0,.7);
+            --shadow:rgba(0,0,0,.5);
+            --input-bg:#2c2c2e;
+        }
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        html{scroll-behavior:smooth}
+        body{
+            font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+            background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;
+            -webkit-font-smoothing:antialiased;transition:background .4s,color .4s;
+        }
+        a{color:inherit;text-decoration:none}
+        img{max-width:100%;height:auto;display:block}
+        ul{list-style:none}
+        button{font-family:inherit}
+
+        .container{max-width:1200px;margin:0 auto;padding:0 24px}
+        .section{padding:100px 0;position:relative}
+        .section-label{font-size:.75rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-3);font-weight:600;margin-bottom:12px}
+        .section-title{font-size:clamp(2rem,4vw,3rem);font-weight:600;letter-spacing:-.02em;line-height:1.15;margin-bottom:20px}
+        .section-sub{font-size:1.1rem;color:var(--text-2);max-width:620px;margin-bottom:56px;font-weight:400}
+
+        .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 30px;border-radius:100px;border:none;font-size:.95rem;font-weight:500;cursor:pointer;transition:all .25s ease}
+        .btn-accent{background:var(--accent-grad);color:#fff}
+        .btn-accent:hover{filter:brightness(1.15);transform:translateY(-2px);box-shadow:0 4px 20px rgba(52,216,90,.3)}
+        .gps-btn{background:transparent;color:var(--accent);border:1px solid var(--accent);border-radius:10px;padding:8px 10px;font-size:.8rem;cursor:pointer;width:100%;margin-bottom:10px}
+        .gps-btn:hover{background:rgba(48,209,88,.1)}
+        .btn-outline{background:transparent;color:var(--text);border:1.5px solid var(--border-2)}
+        .btn-outline:hover{border-color:var(--accent);color:var(--accent-text)}
+        .btn-call{background:var(--text);color:var(--bg);padding:16px 40px;font-size:1.1rem;font-weight:600}
+        .btn-call:hover{opacity:.9}
+
+        nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 0;transition:all .3s;background:transparent}
+        nav.scrolled{background:var(--nav-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:10px 0}
+        nav>.container{display:flex;align-items:center;justify-content:space-between;gap:16px}
+        .nav-logo{display:flex;align-items:center;gap:10px;font-size:1.05rem;font-weight:700;letter-spacing:-.02em;color:var(--text);white-space:nowrap}
+        .nav-logo img{width:34px;height:34px;border-radius:50%;object-fit:cover}
+        .nav-links{display:flex;gap:20px;align-items:center}
+        .nav-links a{font-size:.85rem;font-weight:500;color:var(--text-2);transition:color .2s}
+        .nav-links a:hover{color:var(--text)}
+        .nav-actions{display:flex;gap:8px;align-items:center}
+        .nav-btn{width:36px;height:36px;border-radius:50%;border:1px solid var(--border-2);background:var(--card);color:var(--text);cursor:pointer;font-size:.85rem;font-weight:600;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
+        .nav-btn:hover{border-color:var(--accent);color:var(--accent-text)}
+        .nav-phone{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;border-radius:100px;background:var(--accent);color:#fff!important;font-weight:600!important;white-space:nowrap}
+        .nav-toggle{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:4px}
+        .nav-toggle span{width:24px;height:2px;background:var(--text);border-radius:2px;transition:all .3s}
+
+        .lead-modal{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.5);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity .4s}
+        .lead-modal.active{opacity:1;pointer-events:all}
+        .lead-modal-box{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:44px 40px;max-width:440px;width:90%;text-align:center;transform:translateY(20px) scale(.97);transition:transform .4s cubic-bezier(.22,1,.36,1);position:relative}
+        .lead-modal.active .lead-modal-box{transform:translateY(0) scale(1)}
+        .lead-modal-box h2{font-size:1.5rem;font-weight:700;margin-bottom:6px;letter-spacing:-.02em}
+        .lead-modal-x{position:absolute;top:8px;right:12px;width:32px;height:32px;border-radius:50%;border:1px solid var(--border-2);background:var(--card);color:var(--text-3);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;transition:all .2s;z-index:2}
+        .lead-modal-x:hover{border-color:var(--accent);color:var(--text-2)}
+        .lead-modal-box p{color:var(--text-2);margin-bottom:22px;font-size:.9rem}
+        .lead-modal input{width:100%;padding:14px 16px;margin-bottom:10px;border-radius:10px;border:1.5px solid var(--border-2);background:var(--input-bg);color:var(--text);font-size:.95rem;outline:none;transition:border-color .25s}
+        .lead-modal input:focus{border-color:var(--accent)}
+        .lead-modal input::placeholder{color:var(--text-3)}
+        .lead-modal .btn{width:100%;justify-content:center}
+
+        .hero{min-height:100vh;display:flex;align-items:center;background:var(--bg);padding-top:100px;overflow:hidden;position:relative}
+        .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 85% 15%,var(--accent-bg),transparent 45%);pointer-events:none;opacity:.6}
+        .hero>.container{display:flex;align-items:center;gap:56px;position:relative}
+        .hero-content{flex:1;min-width:300px}
+        .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 16px;border-radius:100px;background:var(--card-2);border:1px solid var(--border);font-size:.78rem;font-weight:500;color:var(--text-2);margin-bottom:20px}
+        .hero-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:blink 1.6s infinite}
+        @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+        .hero h1{font-size:clamp(2.5rem,5.5vw,4.2rem);font-weight:700;letter-spacing:-.03em;line-height:1.04;margin-bottom:16px}
+        .hero h1 .accent{color:var(--accent-text)}
+        .hero p{font-size:1.1rem;color:var(--text-2);max-width:480px;margin-bottom:28px}
+        .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+        .hero-stats{display:flex;gap:36px;margin-top:44px;padding-top:28px;border-top:1px solid var(--border)}
+        .hero-stat h3{font-size:1.5rem;font-weight:700;letter-spacing:-.02em}
+        .hero-stat p{font-size:.8rem;color:var(--text-3);margin:0}
+        .hero-visual{flex:1;max-width:540px;position:relative}
+        .hero-visual img{width:100%;height:auto;border-radius:16px;object-fit:cover;box-shadow:0 24px 70px var(--shadow)}
+        .ufo-float{position:absolute;top:-24px;right:-18px;font-size:2.4rem;animation:floaty 4s ease-in-out infinite;filter:drop-shadow(0 6px 16px var(--shadow))}
+        @keyframes floaty{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-12px) rotate(4deg)}}
+
+        .swag-strip{background:var(--text);color:var(--bg);padding:14px 0;overflow:hidden;white-space:nowrap}
+        .swag-strip .inner{display:inline-block;animation:scrollx 30s linear infinite}
+        .swag-strip span{margin:0 24px;font-size:.78rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;display:inline-flex;align-items:center;gap:24px}
+        .swag-strip .g{color:var(--accent)}
+        @keyframes scrollx{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+        /* BOOK — first section (right below hero) */
+        #booking{background:var(--bg);padding-top:90px}
+        .booking-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:start}
+        .booking-form{padding:36px;border-radius:16px;background:var(--card);border:1px solid var(--border);box-shadow:0 14px 44px var(--shadow)}
+        .booking-form .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+        .booking-form input,.booking-form select,.booking-form textarea{width:100%;padding:13px 14px;margin-bottom:10px;border-radius:10px;border:1.5px solid var(--border-2);background:var(--input-bg);color:var(--text);font-size:.95rem;outline:none;transition:border-color .25s;font-family:inherit}
+        .booking-form input:focus,.booking-form select:focus,.booking-form textarea:focus{border-color:var(--accent)}
+        .booking-form select option{background:var(--card);color:var(--text)}
+        .booking-form textarea{resize:vertical;min-height:84px}
+        .booking-form .btn{width:100%;justify-content:center}
+        .book-call-now{display:flex;align-items:center;gap:14px;margin-bottom:28px;padding:18px 22px;border-radius:14px;background:var(--accent-bg);border:1px solid var(--accent)}
+        .book-call-now .bc-icon{font-size:1.6rem}
+        .book-call-now .bc-txt strong{display:block;font-size:1rem;color:var(--accent-text)}
+        .book-call-now .bc-txt span{font-size:.8rem;color:var(--text-2)}
+        .book-call-now a{margin-left:auto;font-size:1.2rem;font-weight:700;color:var(--accent-text);white-space:nowrap}
+        .booking-info{padding:0 0 0 10px}
+        .booking-info h3{font-size:1.25rem;font-weight:700;margin-bottom:12px;letter-spacing:-.01em}
+        .booking-info>p{color:var(--text-2);margin-bottom:20px}
+        .benefits{display:flex;flex-direction:column;gap:12px}
+        .benefit{display:flex;align-items:flex-start;gap:12px}
+        .benefit .check{width:24px;height:24px;border-radius:50%;background:var(--accent-bg);color:var(--accent-text);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.8rem;font-weight:700}
+        .benefit strong{font-size:.92rem}
+        .benefit .sub{color:var(--text-3);font-size:.82rem}
+
+        #services{background:var(--bg-alt)}
+        .services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+        .service-card{padding:30px;border-radius:16px;background:var(--card);border:1px solid var(--border);transition:all .3s;opacity:0;transform:translateY(16px)}
+        .service-card.visible{opacity:1;transform:translateY(0)}
+        .service-card:hover{border-color:var(--accent);box-shadow:0 10px 36px var(--shadow)}
+        .service-card .icon{font-size:1.7rem;margin-bottom:14px}
+        .service-card h3{font-size:1.1rem;font-weight:600;margin-bottom:8px;letter-spacing:-.01em}
+        .service-card p{font-size:.87rem;color:var(--text-2);line-height:1.65}
+        .service-card .tag{display:inline-block;margin-top:12px;padding:3px 12px;border-radius:100px;font-size:.72rem;font-weight:600;background:var(--card-2);color:var(--text-2);border:1px solid var(--border)}
+        .service-card .tag.accent{background:var(--accent-bg);color:var(--accent-text);border-color:transparent}
+
+        .fleet-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:18px}
+        .fleet-card{border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--border);transition:all .3s;opacity:0;transform:translateY(16px)}
+        .fleet-card.visible{opacity:1;transform:translateY(0)}
+        .fleet-card:hover{box-shadow:0 10px 36px var(--shadow)}
+        .fleet-card img{width:100%;aspect-ratio:16/10;object-fit:cover}
+        .fleet-card .cap{padding:14px 18px;font-size:.85rem;color:var(--text-2);font-weight:500}
+
+        #testimonials{overflow:hidden}
+        .testimonial-wrap{position:relative}
+        .testimonial-wrap::before,.testimonial-wrap::after{content:'';position:absolute;top:0;bottom:0;width:100px;z-index:2;pointer-events:none}
+        .testimonial-wrap::before{left:0;background:linear-gradient(to right,var(--bg),transparent)}
+        .testimonial-wrap::after{right:0;background:linear-gradient(to left,var(--bg),transparent)}
+        .testimonial-track{display:flex;gap:18px;width:max-content;animation:slide 80s linear infinite}
+        .testimonial-track:hover{animation-play-state:paused}
+        .testimonial-card{width:360px;flex-shrink:0;padding:28px;border-radius:16px;background:var(--card);border:1px solid var(--border)}
+        .testimonial-card .stars{color:#e8b338;font-size:.95rem;margin-bottom:10px;letter-spacing:2px}
+        .testimonial-card blockquote{font-size:.88rem;color:var(--text-2);font-style:italic;line-height:1.65;margin-bottom:12px}
+        .testimonial-card .author{font-weight:600;font-size:.84rem}
+        .testimonial-card .author span{color:var(--text-3);font-weight:400}
+        @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+        #areas{background:var(--bg-alt)}
+        .areas-map-wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:start}
+        .areas-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;align-content:start}
+        .area-chip{display:flex;align-items:center;justify-content:center;gap:6px;padding:10px 12px;border-radius:10px;background:var(--card);border:1px solid var(--border);text-align:center;font-weight:500;font-size:.8rem;color:var(--text-2);transition:all .2s}
+        .area-chip:hover{background:var(--accent-bg);border-color:var(--accent);color:var(--accent-text)}
+        .area-chip svg{width:12px;height:12px;opacity:.6}
+        .map-embed{position:sticky;top:90px;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:var(--card)}
+        .map-embed iframe{width:100%;height:400px;border:0;display:block}
+        [data-theme="dark"] .map-embed iframe{filter:grayscale(1) invert(1) contrast(.9)}
+        .map-note{padding:12px 16px;font-size:.8rem;color:var(--text-3);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+        .map-note a{color:var(--accent-text);font-weight:600}
+
+        /* vehicles + parts at BOTTOM of page */
+        #vehicles{background:var(--bg)}
+        .vehicle-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px}
+        .vehicle-card{border-radius:16px;overflow:hidden;border:1px solid var(--border);background:var(--card);transition:all .3s;opacity:0;transform:translateY(16px)}
+        .vehicle-card.visible{opacity:1;transform:translateY(0)}
+        .vehicle-card:hover{box-shadow:0 10px 36px var(--shadow)}
+        .vehicle-img{aspect-ratio:16/10;background:var(--card-2);display:flex;align-items:center;justify-content:center;color:var(--text-3);font-size:.85rem;position:relative;border-bottom:1px solid var(--border);overflow:hidden}
+        .vehicle-img img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+        .vehicle-img .badge{position:absolute;top:12px;right:12px;padding:3px 12px;border-radius:100px;font-size:.72rem;font-weight:600}
+        .vehicle-img .badge.avail{background:var(--accent-bg);color:var(--accent-text)}
+        .vehicle-img .badge.sold{background:#fee;color:#c33}
+        .vehicle-info{padding:22px}
+        .vehicle-info h3{font-size:1rem;font-weight:600;margin-bottom:4px}
+        .vehicle-info .price{font-size:1.3rem;font-weight:700;color:var(--accent-text);margin-bottom:6px}
+        .vehicle-info .specs{display:flex;gap:12px;font-size:.8rem;color:var(--text-3);margin-bottom:14px;flex-wrap:wrap}
+        .vehicle-info .btn{width:100%;justify-content:center}
+
+        #parts{background:var(--bg-alt)}
+        .parts-search{display:flex;gap:10px;margin-bottom:40px;flex-wrap:wrap}
+        .parts-search input{flex:1;min-width:200px;padding:13px 16px;border-radius:10px;border:1.5px solid var(--border-2);background:var(--input-bg);color:var(--text);font-size:.95rem;outline:none;transition:border-color .25s}
+        .parts-search input:focus{border-color:var(--accent)}
+        .parts-search input::placeholder{color:var(--text-3)}
+        .parts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+        .part-card{padding:18px;border-radius:12px;background:var(--card);border:1px solid var(--border);transition:all .2s;opacity:0;transform:translateY(12px)}
+        .part-card.visible{opacity:1;transform:translateY(0)}
+        .part-card:hover{border-color:var(--accent)}
+        .part-card h4{font-size:.88rem;font-weight:600;margin-bottom:4px}
+        .part-card .price{color:var(--accent-text);font-weight:700;font-size:1.05rem}
+        .part-card .tag{font-size:.75rem;color:var(--text-3);margin-top:2px}
+
+        .cta-section{background:var(--text);color:var(--bg);padding:76px 0;text-align:center;position:relative;overflow:hidden}
+        .cta-section h2{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:700;letter-spacing:-.02em;margin-bottom:10px}
+        .cta-section p{font-size:1rem;opacity:.7;margin-bottom:24px}
+        .cta-section .btn{background:var(--accent);color:#fff}
+        .cta-section .btn:hover{filter:brightness(1.1)}
+        footer{padding:44px 0;border-top:1px solid var(--border);text-align:center}
+        footer p{font-size:.8rem;color:var(--text-3)}
+        footer .socials{display:flex;justify-content:center;gap:14px;margin-bottom:14px}
+        footer .socials a{width:36px;height:36px;border-radius:50%;border:1px solid var(--border-2);display:flex;align-items:center;justify-content:center;transition:all .2s;font-size:.9rem;color:var(--text-2)}
+        footer .socials a:hover{border-color:var(--accent);color:var(--accent-text)}
+
+        /* sticky emergency call bar (mobile only) */
+        .sticky-call{position:fixed;left:14px;right:14px;bottom:14px;z-index:150;display:none;align-items:center;justify-content:center;gap:10px;background:var(--accent);color:#fff;font-weight:700;font-size:1.05rem;padding:16px;border-radius:100px;box-shadow:0 10px 34px rgba(0,0,0,.35)}
+        body{padding-bottom:0}
+
+        .fade-up{opacity:0;transform:translateY(20px);transition:all .5s ease-out}
+        .fade-up.visible{opacity:1;transform:translateY(0)}
+
+        @media(max-width:920px){
+            .hero>.container{flex-direction:column-reverse;text-align:center}
+            .hero p{margin-left:auto;margin-right:auto}
+            .hero-actions{justify-content:center}
+            .hero-stats{justify-content:center;flex-wrap:wrap}
+            .hero-visual{max-width:440px;margin-top:20px}
+            .booking-grid{grid-template-columns:1fr}
+            .booking-info{padding:0;text-align:left}
+            .areas-map-wrap{grid-template-columns:1fr}
+            .map-embed{position:static}
+            .nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:var(--nav-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:20px 24px;flex-direction:column;align-items:flex-start;gap:16px;border-bottom:1px solid var(--border)}
+            .nav-links.open{display:flex}
+            .nav-toggle{display:flex}
+        }
+        @media(max-width:600px){
+            .section{padding:60px 0}
+            .lead-modal-box{padding:32px 24px}
+            .booking-form .row{grid-template-columns:1fr}
+            .booking-form{padding:26px 20px}
+            .hero-stats{gap:20px}
+            .hero-stat{flex:1;min-width:90px}
+            .hero h1{font-size:2.2rem}
+            .testimonial-card{width:290px}
+            .nav-phone .txt{display:none}
+            .nav-logo span.txt{display:none}
+            .book-call-now a{font-size:1rem}
+            .sticky-call{display:flex}
+            body{padding-bottom:78px}
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="nav">
+        <div class="container">
+            <a href="#" class="nav-logo">
+                <img src="assets/logo.png" alt="Alien Towing">
+                <span class="txt">Alien Towing</span>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="#booking" data-i18n="nav_book">Book</a>
+                <a href="#services" data-i18n="nav_services">Services</a>
+                <a href="#fleet" data-i18n="nav_fleet">Fleet</a>
+                <a href="#vehicles" data-i18n="nav_vehicles">Vehicles</a>
+                <a href="#parts" data-i18n="nav_parts">Parts</a>
+                <a href="#areas" data-i18n="nav_areas">Areas</a>
+            </div>
+            <div class="nav-actions">
+                <button class="nav-btn" id="langToggle" title="Español / English" onclick="toggleLang()">ES</button>
+                <button class="nav-btn" id="themeToggle" title="Dark / Light" onclick="toggleTheme()">🌙</button>
+                <a href="tel:+17046051318" class="nav-phone">📞 <span class="txt" data-phone>(704) 605-1318</span></a>
+                <button class="nav-toggle" id="navToggle" aria-label="Menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="lead-modal" id="leadModal">
+        <div class="lead-modal-box">
+            <h2 data-i18n="lead_title">Need a tow? 🚨</h2>
+            <p data-i18n="lead_sub">Drop your name &amp; number — we call you back. Fast.</p>
+            <form id="leadForm">
+                <input type="text" name="name" placeholder="Your name" data-i18n-ph="ph_name" autocomplete="name" required>
+                <input type="tel" name="phone" placeholder="Phone number" data-i18n-ph="ph_phone" autocomplete="tel" required>
+                <input type="text" name="location" placeholder="Where is the vehicle right now?" data-i18n-ph="ph_loc" autocomplete="address-line1">
+                <button type="button" class="btn gps-btn" onclick="getLocation()">📍 Use my location</button>
+                <button type="submit" class="btn btn-accent" data-i18n="lead_btn">☎ We'll Call You</button>
+            </form>
+            <p style="margin-top:10px;font-size:.78rem;color:var(--text-3)"><span data-i18n="lead_or">Or call</span> <a href="tel:+17046051318" style="color:var(--accent-text);font-weight:700;text-decoration:none" data-phone-link><strong data-phone>(704) 605-1318</strong></a></p>
+            <button class="lead-modal-x" id="dismissModal">✕</button>
+        </div>
+    </div>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge"><span class="dot"></span><span data-i18n="hero_badge">24/7 Emergency Towing — Charlotte NC</span></div>
+                <h1><span data-i18n="hero_h1a">Towing that's</span><br><span class="accent" data-i18n="hero_h1b">literally out of this world</span> 🛸</h1>
+                <p data-i18n="hero_p">Broken down? Stranded? One call and we're there in 1-5 minutes. Real person, real truck, right now.</p>
+                <div class="hero-actions">
+                    <a href="tel:+17046051318" class="btn btn-call" data-phone-link>📞 <span data-i18n="hero_call">Call Now</span> — <span data-phone>(704) 605-1318</span></a>
+                    <a href="#booking" class="btn btn-outline" data-i18n="hero_services">Book Online ↓</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat"><h3>1-5</h3><p data-i18n="hero_s1">Min response</p></div>
+                    <div class="hero-stat"><h3>24/7</h3><p data-i18n="hero_s2">Always on call</p></div>
+                    <div class="hero-stat"><h3>100%</h3><p data-i18n="hero_s3">Satisfaction</p></div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="ufo-float">🛸</div>
+                <img src="assets/tow-suv.jpg" alt="Alien Towing RAM 2500 tow truck">
+            </div>
+        </div>
+    </section>
+
+    <div class="swag-strip">
+        <div class="inner">
+            <span>Fast <span class="g">·</span> Fair <span class="g">·</span> 24/7 <span class="g">·</span> Out of this world <span class="g">·</span> We buy junk cars <span class="g">·</span> Fast <span class="g">·</span> Fair <span class="g">·</span> 24/7 <span class="g">·</span> Out of this world <span class="g">·</span> We buy junk cars <span class="g">·</span></span>
+        </div>
+    </div>
+
+    <!-- 1. BOOK — first thing you see when you swipe down -->
+    <section class="section" id="booking">
+        <div class="container">
+            <p class="section-label fade-up" data-i18n="lbl_book">Book</p>
+            <h2 class="section-title fade-up" data-i18n="t_book">Get help in seconds</h2>
+            <p class="section-sub fade-up" data-i18n="s_book">Emergency? Call us. Non-urgent? Fill this out and we'll confirm within the hour.</p>
+            <div class="booking-grid">
+                <div class="booking-form fade-up">
+                    <div class="book-call-now">
+                        <div class="bc-icon">🛸</div>
+                        <div class="bc-txt"><strong data-i18n="bcn_t">Need it NOW?</strong><span data-i18n="bcn_s">Skip the form — call and a truck rolls.</span></div>
+                        <a href="tel:+17046051318" data-phone-link data-phone>(704) 605-1318</a>
+                    </div>
+                    <form id="bookingForm">
+                        <div class="row">
+                            <input type="text" name="name" placeholder="Full name" data-i18n-ph="ph_fullname" autocomplete="name" required>
+                            <input type="tel" name="phone" placeholder="Phone number" data-i18n-ph="ph_phone" autocomplete="tel" required>
+                        </div>
+                        <div class="row">
+                            <input type="text" name="location" placeholder="Pickup location" data-i18n-ph="ph_loc" autocomplete="street-address" required>
+                            <input type="text" name="vehicle" placeholder="Vehicle make & model" data-i18n-ph="ph_vehicle" autocomplete="organization" required>
+                        </div>
+                        <select name="service" required>
+                            <option value="" data-i18n="bk_sel">Select service</option>
+                            <option value="towing" data-i18n="bk_tow">Towing</option>
+                            <option value="roadside" data-i18n="bk_road">Roadside Assistance</option>
+                            <option value="recovery" data-i18n="bk_rec">Heavy-Duty Recovery</option>
+                            <option value="transport" data-i18n="bk_trans">Vehicle Transport</option>
+                            <option value="other" data-i18n="bk_oth">Other</option>
+                        </select>
+                        <textarea name="details" placeholder="What happened? (optional)" data-i18n-ph="ph_details"></textarea>
+                        <button type="submit" class="btn btn-accent" data-i18n="bk_submit">Book My Tow →</button>
+                    </form>
+                </div>
+                <div class="booking-info fade-up">
+                    <h3 data-i18n="bk_why">Why people call us</h3>
+                    <p data-i18n="bk_whyp">Fast, fair, and human. No hidden fees, no voicemail, no runaround.</p>
+                    <div class="benefits">
+                        <div class="benefit"><div class="check">✓</div><div><strong data-i18n="bk_b1">1-5 min response</strong><br><span class="sub" data-i18n="bk_b1s">Average across Charlotte — every single time</span></div></div>
+                        <div class="benefit"><div class="check">✓</div><div><strong data-i18n="bk_b2">Upfront pricing</strong><br><span class="sub" data-i18n="bk_b2s">You approve the quote before we roll</span></div></div>
+                        <div class="benefit"><div class="check">✓</div><div><strong data-i18n="bk_b3">Licensed & insured</strong><br><span class="sub" data-i18n="bk_b3s">USDOT #4568462 — Full commercial coverage</span></div></div>
+                        <div class="benefit"><div class="check">✓</div><div><strong data-i18n="bk_b4">Live dispatch</strong><br><span class="sub" data-i18n="bk_b4s">Real person answers, not a voicemail box</span></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. WHAT WE DO -->
+    <section class="section" id="services">
+        <div class="container">
+            <p class="section-label fade-up" data-i18n="lbl_services">Services</p>
+            <h2 class="section-title fade-up" data-i18n="t_services">What we do</h2>
+            <p class="section-sub fade-up" data-i18n="s_services">Full-spectrum towing and recovery. One call, one truck, done.</p>
+            <div class="services-grid">
+                <div class="service-card"><div class="icon">🚛</div><h3 data-i18n="sv1_t">Flatbed Towing</h3><p data-i18n="sv1_d">Safe, damage-free transport for all vehicles. No dragging, no scratches — secure loading and delivery every time.</p><span class="tag accent" data-i18n="sv1_tag">Most requested</span></div>
+                <div class="service-card"><div class="icon">🛡️</div><h3 data-i18n="sv2_t">Heavy-Duty Recovery</h3><p data-i18n="sv2_d">Class 3–8 trucks, buses, equipment. Our RAM 5500 handles anything you throw at it with precision and power.</p><span class="tag" data-i18n="sv2_tag">24/7</span></div>
+                <div class="service-card"><div class="icon">⚡</div><h3 data-i18n="sv3_t">Roadside Assistance</h3><p data-i18n="sv3_d">Dead battery? Locked keys? Flat tire? Fuel delivery? We're there in 1-5 minutes with everything needed to get you moving.</p><span class="tag accent" data-i18n="sv3_tag">Emergency</span></div>
+                <div class="service-card"><div class="icon">🏎️</div><h3 data-i18n="sv4_t">Luxury Transport</h3><p data-i18n="sv4_d">Classic cars, exotics, low-clearance vehicles. Soft straps, white gloves, zero miles on your odometer.</p><span class="tag" data-i18n="sv4_tag">Enclosed available</span></div>
+                <div class="service-card"><div class="icon">🔄</div><h3 data-i18n="sv5_t">Long-Distance Towing</h3><p data-i18n="sv5_d">Need a car moved across state lines? Competitive rates, real-time tracking, transparent pricing.</p></div>
+                <div class="service-card"><div class="icon">💵</div><h3 data-i18n="sv6_t">We Buy Junk Cars</h3><p data-i18n="sv6_d">Got a vehicle taking up space? We'll buy it on the spot, tow it free, and handle all the paperwork.</p><span class="tag accent" data-i18n="sv6_tag">Cash today</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. FLEET -->
+    <section class="section" id="fleet">
+        <div class="container">
+            <p class="section-label fade-up" data-i18n="lbl_fleet">Our Fleet</p>
+            <h2 class="section-title fade-up" data-i18n="t_fleet">Meet the trucks</h2>
+            <p class="section-sub fade-up" data-i18n="s_fleet">Real trucks. Real work. Ready for anything.</p>
+            <div class="fleet-grid">
+                <div class="fleet-card"><img src="assets/truck-ram5500.jpg" alt="RAM 5500 heavy duty"><div class="cap" data-i18n="ft1">RAM 5500 — Heavy-Duty Recovery</div></div>
+                <div class="fleet-card"><img src="assets/tow-sedan.jpg" alt="Tow truck with purple sedan"><div class="cap" data-i18n="ft2">On the job — Sedan flatbed tow</div></div>
+                <div class="fleet-card"><img src="assets/tow-double.jpg" alt="RAM 3500 towing blue car"><div class="cap" data-i18n="ft3">Double load — two at a time</div></div>
+                <div class="fleet-card"><img src="assets/tow-van.jpg" alt="Dodge flatbed in the yard"><div class="cap" data-i18n="ft4">Van recovery — on the job</div></div>
+                <div class="fleet-card"><img src="assets/tow-ram-flatbed.jpg" alt="Tow truck roadside"><div class="cap" data-i18n="ft5">RAM flatbed — ready to roll</div></div>
+                <div class="fleet-card"><img src="assets/tow-junk-buy.jpg" alt="We buy junk cars"><div class="cap" data-i18n="ft6">We buy junk cars — branded & ready</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. REVIEWS -->
+    <section class="section" id="testimonials">
+        <div class="container">
+            <p class="section-label fade-up" data-i18n="lbl_reviews">Reviews</p>
+            <h2 class="section-title fade-up" data-i18n="t_reviews">Customers give us 5 stars</h2>
+            <p class="section-sub fade-up" data-i18n="s_reviews">Real people, real tows, real reviews. Hover to pause.</p>
+        </div>
+        <div class="testimonial-wrap">
+            <div class="testimonial-track" id="testimonialTrack"></div>
+        </div>
+    </section>
+
+    <!-- 5. WHERE WE SERVE (location, above inventory) -->
+    <section class="section" id="areas">
+        <div class="container">
+            <p class="section-label fade-up" data-i18n="lbl_areas">Coverage</p>
+            <h2 class="section-title fade-up" data-i18n="t_areas">Where we serve</h2>
+            <p class="section-sub fade-up" data-i18n="s_areas">Greater Charlotte and surrounding areas. 24/7, 365. Click any area to open Apple Maps.</p>
+            <div class="areas-map-wrap">
+                <div class="areas-grid" id="areasGrid"></div>
+                <div class="map-embed">
+                    <iframe src="https://maps.apple.com/?ll=35.2271,-80.8431&z=10&output=embed&t=m" title="Alien Towing service area map"></iframe>
+                    <div class="map-note">
+                        📍 <span data-i18n="map_note">Charlotte, NC &amp; surroundings —</span>
+                        <a href="https://maps.apple.com/?ll=35.2271,-80.8431&z=10&q=Charlotte" target="_blank" rel="noopener" data-i18n="map_open">Open full map ↗</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. CARS FOR SALE (bottom of page) -->
+    <section class="section" id="vehicles">
+        <div class="container">
+            <p class="section-label fade-up" data-i18n="lbl_inv">Inventory</p>
+            <h2 class="section-title fade-up" data-i18n="t_inv">Cars & trucks for sale</h2>
+            <p class="section-sub fade-up" data-i18n="s_inv">We buy, sell, and trade. Every vehicle inspected and ready to drive.</p>
+            <div class="vehicle-grid" id="vehicleGrid"></div>
+        </div>
+    </section>
+
+    <!-- 7. PARTS (very bottom, most niche) -->
+    <section class="section" id="parts">
+        <div class="container">
+            <p class="section-label fade-up" data-i18n="lbl_parts">Parts</p>
+            <h2 class="section-title fade-up" data-i18n="t_parts">Find the part you need</h2>
+            <p class="section-sub fade-up" data-i18n="s_parts">New, used, and OEM parts for most makes and models.</p>
+            <div class="parts-search fade-up">
+                <input type="text" id="partsSearch" placeholder="Search parts…" data-i18n-ph="ph_search">
+                <button class="btn btn-accent" onclick="searchParts()" data-i18n="btn_search">Search</button>
+            </div>
+            <div class="parts-grid" id="partsGrid"></div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2 data-i18n="cta_t">Need a tow right now?</h2>
+        <p data-i18n="cta_p">We're standing by. Call and we'll have a truck on the way before you hang up.</p>
+        <a href="tel:+17046051318" class="btn" data-phone-link>📞 <span data-phone>(704) 605-1318</span></a>
+    </section>
+
+    <a href="tel:+17046051318" class="sticky-call" data-phone-link>📞 <span data-i18n="sticky_call">Call Now</span> — <span data-phone>(704) 605-1318</span></a>
+
+    <footer>
+        <div class="container">
+            <div class="socials">
+                <a href="#" aria-label="Facebook">f</a>
+                <a href="#" aria-label="Instagram">ig</a>
+                <a href="#" aria-label="Google">G</a>
+                <a href="#" aria-label="YouTube">YT</a>
+            </div>
+            <p>© 2026 Alien Towing LLC · <span data-i18n="ft_city">Charlotte, NC</span> · USDOT #4568462</p>
+            <p style="margin-top:4px" data-i18n="ft_line">Licensed · Insured · 24/7 Emergency Service</p>
+        </div>
+    </footer>
+
+    <script>
+        /* ============ DATA ============ */
+        const PHONES = {
+            en:{display:'(704) 605-1318', tel:'+17046051318'},
+            es:{display:'(704) 606-3696', tel:'+17046063696'}
+        };
+        const VEHICLES = [
+            /* To add a car: drop a photo in assets/ and add img:'car-filename.jpg' to the entry. All other fields are required. */
+            {name:'2018 Ford F-150 Lariat',price:'$34,900',miles:'48k mi',engine:'3.5L V6 EcoBoost',color:'Velocity Blue',sold:false},
+            {name:'2020 Toyota Tundra SR5',price:'$38,500',miles:'36k mi',engine:'5.7L V8',color:'Cement Gray',sold:false},
+            {name:'2015 RAM 2500 Cummins',price:'$28,900',miles:'89k mi',engine:'6.7L Turbo Diesel',color:'Granite Crystal',sold:false},
+            {name:'2021 Jeep Wrangler Unlimited',price:'$41,200',miles:'22k mi',engine:'3.6L V6',color:'Sarge Green',sold:false},
+            {name:'2017 Chevy Silverado 1500',price:'$26,500',miles:'72k mi',engine:'5.3L V8',color:'Summit White',sold:true},
+            {name:'2019 Honda Civic Si',price:'$23,900',miles:'31k mi',engine:'1.5L Turbo',color:'Sonic Gray',sold:false},
+        ];
+        const PARTS = [
+            {name:'Alternator — Honda Accord 2013-2017',price:'$89',condition:'OEM Remanufactured'},
+            {name:'Brake Rotor Set — Ford F-150 (4pc)',price:'$159',condition:'New — Powerstop'},
+            {name:'Starter — Chevy Silverado 2014-2018',price:'$72',condition:'New — AC Delco'},
+            {name:'Catalytic Converter — Toyota Camry',price:'$195',condition:'OEM Used'},
+            {name:'Engine — 5.3L LM7 V8 (122k mi)',price:'$895',condition:'Used — Tested & Warranted'},
+            {name:'Transmission — 6L80E (68RFE)',price:'$1,295',condition:'Used — 60 Day Warranty'},
+            {name:'Headlight — BMW 3 Series',price:'$145',condition:'OEM Used'},
+            {name:'Battery — Optima YellowTop D34/78',price:'$219',condition:'New — Deep Cycle'},
+        ];
+        const AREA_NAMES = ['Charlotte Uptown','South End','Ballantyne','Pineville','Matthews','Waxhaw','Fort Mill SC','Rock Hill SC','Indian Land SC','Steele Creek','Lake Wylie','Cornelius','Huntersville','Davidson','Concord','Kannapolis','Gastonia','Belmont','Mount Holly','I-485 Corridor','I-77 Corridor','US-74','NC-51'];
+        const TESTIMONIALS = [
+            {stars:'★★★★★',text:'"Broke down on 485 at midnight. Called Alien Towing — they were there in 15 minutes. Fair price, professional driver, got me home safe."',author:'Marcus J.',place:'Charlotte'},
+            {stars:'★★★★★',text:'"Needed my classic Mustang transported from Charlotte to Asheville. They treated it like their own. Enclosed trailer, soft straps, perfect delivery."',author:'David R.',place:'Fort Mill, SC'},
+            {stars:'★★★★★',text:'"Our dealership uses them exclusively. 40+ transports this year, zero issues. Reliable, communicative, seamless billing."',author:'Lauren T.',place:'Ballantyne'},
+            {stars:'★★★★★',text:'"Dead battery at SouthPark at closing time. Truck was there in 10 minutes, jumped me, and followed me home to make sure I was good."',author:'James P.',place:'SouthPark'},
+            {stars:'★★★★★',text:'"Sold them my old junk truck — cash in hand, towed same day, zero hassle. Exactly what they promised."',author:'Tony M.',place:'Matthews'},
+            {stars:'★★★★★',text:'"Winched me out after I ran off the shoulder on 485 in the rain. Driver even helped me call my insurance. Above and beyond."',author:'Angela R.',place:'Steele Creek'},
+            {stars:'★★★★★',text:'"Transported my 1970 Chevelle to a car show in Atlanta. Enclosed the whole way, delivered spotless. Treat old iron like gold."',author:'Big Ray',place:'Rock Hill, SC'},
+            {stars:'★★★★★',text:'"Locked my keys in my own driveway at 1am. They got me in without a scratch, five minutes flat."',author:'Sam K.',place:'Huntersville'},
+        ];
+
+        const I18N = {
+            en:{
+                nav_services:'Services',nav_fleet:'Fleet',nav_vehicles:'Vehicles',nav_parts:'Parts',nav_book:'Book',nav_areas:'Areas',
+                lead_title:'Need a tow? 🚨',lead_sub:"Drop your name & number — we call you back. Fast.",ph_name:'Your name',ph_phone:'Phone number',ph_loc:'Where are you? (optional)',lead_btn:'☎ We\'ll Call You',lead_or:'Or call',lead_dismiss:'Just looking',
+                hero_p:'Broken down? Stranded? One call and we\\'re there in 1-5 minutes. Real person, real truck, right now.',hero_call:'Call Now',hero_services:'Book Online ↓',hero_s1:'Min response',hero_s2:'Always on call',hero_s3:'Satisfaction',
+                lbl_book:'Book',t_book:'Get help in seconds',s_book:'Emergency? Call us. Non-urgent? Fill this out and we\'ll confirm within 5 minutes.',
+                bcn_t:'Need it NOW?',bcn_s:'Skip the form — call and a truck rolls.',
+                ph_fullname:'Full name',ph_email:'Email (optional)',ph_vehicle:'Vehicle make & model',bk_sel:'Select service',bk_tow:'Towing',bk_road:'Roadside Assistance',bk_rec:'Heavy-Duty Recovery',bk_trans:'Vehicle Transport',bk_oth:'Other',ph_details:'What happened? (optional)',bk_submit:'Book My Tow →',
+                bk_why:'Why people call us',bk_whyp:'Fast, fair, and reliable. No hidden fees, no voicemail, no runaround.',
+                bk_b1:'1-5 min response',bk_b1s:'Average across Charlotte — every single time',bk_b2:'Upfront pricing',bk_b2s:'You approve the quote before we roll',bk_b3:'Licensed & insured',bk_b3s:'USDOT #4568462 — Full commercial coverage',bk_b4:'Live dispatch',bk_b4s:'Real person answers, not a voicemail box',
+                lbl_services:'Services',t_services:'What we do',s_services:'Full-spectrum towing and recovery. One call, one truck, done.',
+                sv1_t:'Flatbed Towing',sv1_d:'Safe, damage-free transport for all vehicles. No dragging, no scratches — secure loading and delivery every time.',sv1_tag:'Most requested',
+                sv2_t:'Heavy-Duty Recovery',sv2_d:'Class 3–8 trucks, buses, equipment. Our RAM 5500 handles anything you throw at it with precision and power.',sv2_tag:'24/7',
+                sv3_t:'Roadside Assistance',sv3_d:'Dead battery? Locked keys? Flat tire? Fuel delivery? We\'re there in 1-5 minutes with everything needed to get you moving.',sv3_tag:'Emergency',
+                sv4_t:'Luxury Transport',sv4_d:'Classic cars, exotics, low-clearance vehicles. Soft straps, white gloves, zero miles on your odometer.',sv4_tag:'Enclosed available',
+                sv5_t:'Long-Distance Towing',sv5_d:'Need a car moved across state lines? Competitive rates, real-time tracking, transparent pricing.',
+                sv6_t:'We Buy Junk Cars',sv6_d:'Got a vehicle taking up space? We\'ll buy it on the spot, tow it free, and handle all the paperwork.',sv6_tag:'Cash today',
+                lbl_fleet:'Our Fleet',t_fleet:'Meet the trucks',s_fleet:'Real trucks. Real work. Ready for anything.',
+                ft1:'RAM 5500 — Heavy-Duty Recovery',ft2:'On the job — Sedan flatbed tow',ft3:'Double load — two at a time',ft4:'Van recovery — on the job',ft5:'RAM flatbed — ready to roll',ft6:'We buy junk cars — branded & ready',
+                lbl_reviews:'Reviews',t_reviews:'Customers give us 5 stars',s_reviews:'Real people, real tows, real reviews. Hover to pause.',
+                lbl_areas:'Coverage',t_areas:'Where we serve',s_areas:'Greater Charlotte and surrounding areas. 24/7, 365. Click any area to open Apple Maps.',map_note:'Charlotte, NC & surroundings —',map_open:'Open full map ↗',
+                lbl_inv:'Inventory',t_inv:'Cars & trucks for sale',s_inv:'We buy, sell, and trade. Every vehicle inspected and ready to drive.',
+                lbl_parts:'Parts',t_parts:'Find the part you need',s_parts:'New, used, and OEM parts for most makes and models.',ph_search:'Search parts…',btn_search:'Search',
+                cta_t:'Need a tow right now?',cta_p:"We're standing by. Call and we'll have a truck on the way before you hang up.",
+                sticky_call:'Call Now',
+                ft_city:'Charlotte, NC',ft_line:'Licensed · Insured · 24/7 Emergency Service',
+                avail:'Available',sold:'Sold',inquire:'Inquire',view_similar:'Sold — View Similar',no_parts:'No parts found. Try a different search or',call_us:'call us',
+            },
+            es:{
+                nav_services:'Servicios',nav_fleet:'Flota',nav_vehicles:'Vehículos',nav_parts:'Repuestos',nav_book:'Reservar',nav_areas:'Áreas',
+                lead_title:'¿Necesitas remolque? 🚨',lead_sub:'Déjanos tu nombre y número — te llamamos. Rápido.',ph_name:'Tu nombre',ph_phone:'Número de teléfono',ph_loc:'¿Dónde estás? (opcional)',lead_btn:'☎ Te Llamamos',lead_or:'O llama',lead_dismiss:'Solo mirando',
+                hero_badge:'Remolque de emergencia 24/7 — Charlotte NC',hero_h1a:'Remolque que',hero_h1b:'viene de otro mundo',hero_p:'¿Descompuesto? ¿Varado? Una llamada y llegamos en 1-5 minutos. Persona real, camión real, ahora mismo.',hero_call:'Llama Ahora',hero_services:'Reservar en Línea ↓',hero_s1:'Respuesta en min',hero_s2:'Siempre disponibles',hero_s3:'Satisfacción',
+                lbl_book:'Reservar',t_book:'Ayuda en segundos',s_book:'¿Emergencia? Llámanos. ¿No es urgente? Llena esto y confirmamos en 5 minutos.',
+                bcn_t:'¿Lo necesitas YA?',bcn_s:'Olvida el formulario — llama y el camión sale.',
+                ph_fullname:'Nombre completo',ph_email:'Correo (opcional)',ph_vehicle:'Marca y modelo del vehículo',bk_sel:'Selecciona el servicio',bk_tow:'Remolque',bk_road:'Asistencia en Carretera',bk_rec:'Recuperación Pesada',bk_trans:'Transporte de Vehículos',bk_oth:'Otro',ph_details:'¿Qué pasó? (opcional)',bk_submit:'Reservar mi Remolque →',
+                bk_why:'Por qué nos llaman',bk_whyp:'Rápido, justo y confiable. Sin cobros ocultos, sin contestadoras, sin rodeos.',
+                bk_b1:'Respuesta en 1-5 min',bk_b1s:'Promedio en todo Charlotte — cada vez',bk_b2:'Precio por adelantado',bk_b2s:'Apruebas el precio antes de que salgamos',bk_b3:'Licencia y seguro',bk_b3s:'USDOT #4568462 — Cobertura comercial completa',bk_b4:'Despacho en vivo',bk_b4s:'Una persona real contesta, no una máquina',
+                lbl_services:'Servicios',t_services:'Qué hacemos',s_services:'Remolque y recuperación completo. Una llamada, un camión, listo.',
+                sv1_t:'Remolque con Plataforma',sv1_d:'Transporte seguro para todos los vehículos. Sin arrastre, sin rasguños — carga segura y entrega perfecta.',sv1_tag:'Más solicitado',
+                sv2_t:'Recuperación Pesada',sv2_d:'Camiones clase 3–8, buses, equipo. Nuestra RAM 5500 maneja cualquier cosa con precisión y potencia.',sv2_tag:'24/7',
+                sv3_t:'Asistencia en Carretera',sv3_d:'¿Batería muerta? ¿Llaves encerradas? ¿Llanta ponchada? Estamos ahí en 1-5 minutos con todo lo necesario.',sv3_tag:'Emergencia',
+                sv4_t:'Transporte de Lujo',sv4_d:'Autos clásicos, exóticos y de baja altura. Correas suaves, guantes blancos, cero millas en el odómetro.',sv4_tag:'Cerrado disponible',
+                sv5_t:'Remolque de Larga Distancia',sv5_d:'¿Necesitas mover un carro a otro estado? Precios competitivos, seguimiento en tiempo real, precios transparentes.',
+                sv6_t:'Compramos Carros Chatarra',sv6_d:'¿Tienes un vehículo estorbando? Lo compramos al momento, remolque gratis y manejamos todos los papeles.',sv6_tag:'Efectivo hoy',
+                lbl_fleet:'Nuestra Flota',t_fleet:'Conoce los camiones',s_fleet:'Camiones reales. Trabajo real. Listos para todo.',
+                ft1:'RAM 5500 — Recuperación Pesada',ft2:'En el trabajo — sedán en plataforma',ft3:'Doble carga — dos a la vez',ft4:'Recuperación de van — en acción',ft5:'RAM plataforma — listo para rodar',ft6:'Compramos carros chatarra — listo',
+                lbl_reviews:'Opiniones',t_reviews:'Clientes nos dan 5 estrellas',s_reviews:'Gente real, remolques reales, reseñas reales. Pasa el cursor para pausar.',
+                lbl_areas:'Cobertura',t_areas:'Dónde servimos',s_areas:'Charlotte y alrededores. 24/7, 365. Haz clic en cualquier área para abrir Apple Maps.',map_note:'Charlotte, NC y alrededores —',map_open:'Abrir mapa completo ↗',
+                lbl_inv:'Inventario',t_inv:'Carros y camiones en venta',s_inv:'Compramos, vendemos e intercambiamos. Cada vehículo inspeccionado y listo para manejar.',
+                lbl_parts:'Repuestos',t_parts:'Encuentra el repuesto que necesitas',s_parts:'Repuestos nuevos, usados y de fábrica para la mayoría de marcas y modelos.',ph_search:'Buscar repuestos…',btn_search:'Buscar',
+                cta_t:'¿Necesitas remolque ahora?',cta_p:'Estamos listos. Llama y tendremos un camión en camino antes de que cuelgues.',
+                sticky_call:'Llama Ahora',
+                ft_city:'Charlotte, NC',ft_line:'Licencia · Seguro · Servicio de Emergencia 24/7',
+                avail:'Disponible',sold:'Vendido',inquire:'Preguntar',view_similar:'Vendido — Ver Similar',no_parts:'No se encontraron repuestos. Intenta otra búsqueda o',call_us:'llámanos',
+            }
+        };
+
+        /* ============ STATE ============ */
+        let lang = localStorage.getItem('lang') || 'en';
+        let theme = localStorage.getItem('theme') || 'light';
+
+        function applyTheme(){
+            document.documentElement.setAttribute('data-theme',theme);
+            document.getElementById('themeToggle').textContent = theme==='dark' ? '☀️' : '🌙';
+        }
+        function toggleTheme(){
+            theme = theme==='dark'?'light':'dark';
+            localStorage.setItem('theme',theme);
+            applyTheme();
+        }
+        function applyLang(){
+            const dict = I18N[lang] || I18N.en;
+            document.querySelectorAll('[data-i18n]').forEach(el=>{
+                const k=el.getAttribute('data-i18n');
+                if(dict[k]!=null) el.textContent=dict[k];
+            });
+            document.querySelectorAll('[data-i18n-ph]').forEach(el=>{
+                const k=el.getAttribute('data-i18n-ph');
+                if(dict[k]!=null) el.placeholder=dict[k];
+            });
+            document.documentElement.lang = lang;
+            document.getElementById('langToggle').textContent = lang==='es'?'EN':'ES';
+            if(lang==='es') document.title='Alien Towing — Remolque y Recuperación en Charlotte NC';
+            else document.title="Alien Towing — Charlotte's Premium Towing & Recovery";
+            /* phone swaps with language: ES → 606-3696, EN → 605-1318 */
+            const ph = PHONES[lang] || PHONES.en;
+            document.querySelectorAll('[data-phone]').forEach(el=>el.textContent=ph.display);
+            document.querySelectorAll('[data-phone-link]').forEach(el=>el.href='tel:'+ph.tel);
+            renderVehicles();renderParts();
+        }
+        function toggleLang(){
+            lang = lang==='es'?'en':'es';
+            localStorage.setItem('lang',lang);
+            applyLang();
+        }
+
+        /* ============ RENDER ============ */
+        function pin(){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>'}
+        function mapUrl(area){return 'https://maps.apple.com/?q='+encodeURIComponent(area+', NC')}
+        const dict=()=>I18N[lang]||I18N.en;
+
+        function renderVehicles(){
+            const d=dict();
+            const ph=(PHONES[lang]||PHONES.en).display;
+            document.getElementById('vehicleGrid').innerHTML=VEHICLES.map(v=>
+                `<div class="vehicle-card fade-up">
+                    <div class="vehicle-img">${v.img?`<img src="assets/${v.img}" alt="${v.name}">`:`<span>${v.color}</span>`}<span class="badge ${v.sold?'sold':'avail'}">${v.sold?d.sold:d.avail}</span></div>
+                    <div class="vehicle-info">
+                        <h3>${v.name}</h3>
+                        <div class="price">${v.price}</div>
+                        <div class="specs"><span>📏 ${v.miles}</span><span>⚙️ ${v.engine}</span><span>🎨 ${v.color}</span></div>
+                        <button class="btn btn-accent" onclick="alert('${d.inquire}: ${ph}')">${v.sold?d.view_similar:d.inquire}</button>
+                    </div>
+                </div>`
+            ).join('')
+        }
+        function renderParts(f=''){
+            const d=dict();
+            const p=f?PARTS.filter(x=>x.name.toLowerCase().includes(f.toLowerCase())):PARTS;
+            const tel=(PHONES[lang]||PHONES.en).tel;
+            document.getElementById('partsGrid').innerHTML=p.length?p.map(x=>
+                `<div class="part-card fade-up"><h4>${x.name}</h4><div class="price">${x.price}</div><div class="tag">${x.condition}</div></div>`
+            ).join(''):`<p style="color:var(--text-3)">${d.no_parts} <a href="tel:${tel}" style="color:var(--accent-text)">${d.call_us}</a>.</p>`
+        }
+        function searchParts(){renderParts(document.getElementById('partsSearch').value)}
+        function renderAreas(){
+            document.getElementById('areasGrid').innerHTML=AREA_NAMES.map(a=>
+                `<a class="area-chip fade-up" href="${mapUrl(a)}" target="_blank" rel="noopener">${pin()}${a}</a>`
+            ).join('')
+        }
+        function renderTestimonials(){
+            const cards=TESTIMONIALS.map(t=>
+                `<div class="testimonial-card">
+                    <div class="stars">${t.stars}</div>
+                    <blockquote>${t.text}</blockquote>
+                    <div class="author">${t.author} <span>— ${t.place}</span></div>
+                </div>`
+            ).join('');
+            document.getElementById('testimonialTrack').innerHTML=cards+cards;
+        }
+
+        /* ============ LEAD DELIVERY ============ */
+        /* Sends every form to Telegram and also tries local relay */
+        function deliverLead(form, data){
+            // Send to Telegram
+            const adParams = new URLSearchParams(window.location.search);
+            const utmCampaign = adParams.get('utm_campaign') || '';
+            const gclid = adParams.get('gclid') || '';
+            fetch('https://api.telegram.org/bot8861182350:AAEjo69clBvM-Ycta-Aa9GxDJqGVuFAMOok/sendMessage',{
+                method:'POST',
+                headers:{'Content-Type':'application/json'},
+                body:JSON.stringify({
+                    chat_id:'8102384229',
+                    text:`🚨 NEW LEAD — Alien Towing (${form})\n\nName: ${data.name}\nPhone: ${data.phone}\nLocation: ${data.location || '—'}\nService: ${data.service || '—'}\nAd: ${utmCampaign || 'organic'}${gclid ? '\nGCLID: '+gclid : ''}`
+                })
+            }).catch(()=>{});
+            // Also log locally
+            try{fetch('http://localhost:8001/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({form:form, ...data, lang:lang, ts:new Date().toISOString()})}).catch(()=>{})}catch(e){}
+        }
+
+        /* ============ FORMS ============ */
+        document.getElementById('leadForm').addEventListener('submit',function(e){
+            e.preventDefault();const d=Object.fromEntries(new FormData(this));
+            console.log('Lead:',d);
+            deliverLead('lead-popup-form', d);
+            alert(lang==='es'?'¡Recibido! Te llamamos enseguida. — Alien Towing':'Got it! We\'ll call you right back. — Alien Towing');
+            document.getElementById('leadModal').classList.remove('active');this.reset()
+        });
+        document.getElementById('dismissModal').addEventListener('click',()=>{
+            document.getElementById('leadModal').classList.remove('active');
+        });
+        setTimeout(()=>{document.getElementById('leadModal').classList.add('active')},300);
+        document.getElementById('bookingForm').addEventListener('submit',function(e){
+            e.preventDefault();const d=Object.fromEntries(new FormData(this));
+            console.log('Booking:',d);
+            deliverLead('booking-form', d);
+            alert(lang==='es'?'¡Reserva enviada! Confirmamos en 5 minutos.':'Booking submitted! We\'ll confirm within 5 minutes.');
+            this.reset()
+        });
+
+        /* ============ NAV + OBSERVER ============ */
+        document.getElementById('navToggle').addEventListener('click',()=>document.getElementById('navLinks').classList.toggle('open'));
+        document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open')));
+        window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',window.scrollY>50));
+        const obs=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.15});
+        document.querySelectorAll('.fade-up,.service-card,.vehicle-card,.part-card,.fleet-card,.area-chip').forEach(e=>obs.observe(e));
+
+        /* ============ INIT ============ */
+        applyTheme();applyLang();renderAreas();renderTestimonials();
+        setTimeout(()=>{document.querySelectorAll('.fade-up,.service-card,.vehicle-card,.part-card,.fleet-card,.area-chip').forEach(e=>{if(!e.classList.contains('visible'))obs.observe(e)})},200);
+    </script>
+</body>
+</html>
