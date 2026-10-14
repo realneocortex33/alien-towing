@@ -5,38 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alien Towing — Charlotte's Premium Towing & Recovery</title>
     <meta name="description" content="24/7 professional towing, roadside assistance, and recovery in Charlotte NC">
+    <meta name="theme-color" content="#000000">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛸</text></svg>">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+    <!-- hero image = LCP on desktop + mobile; Leaflet css/js load lazily when the map scrolls near view -->
+    <link rel="preload" as="image" href="assets/truck-ram2500.jpg" fetchpriority="high">
+    <link rel="dns-prefetch" href="https://unpkg.com">
+    <link rel="dns-prefetch" href="https://tile.openstreetmap.org">
+    <!-- apply saved theme before first paint (no dark→light flash) -->
+    <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||'dark')}catch(e){}</script>
     <style>
         :root{
             --bg:#fff;--bg-alt:#f5f5f7;--card:#fff;--card-2:#fafafa;
             --border:#e5e5e5;--border-2:#d4d4d4;
-            --text:#1d1d1f;--text-2:#6e6e73;--text-3:#86868b;
-            --accent:#2d8a4e;--accent-bg:#e8f3e8;--accent-text:#2d8a4e;
+            --text:#1d1d1f;--text-2:#515154;--text-3:#6e6e73;
+            --accent:#237a43;--accent-bg:#e8f3e8;--accent-text:#237a43;--on-accent:#fff;
+            --danger:#c9302c;
             --nav-bg:rgba(255,255,255,.85);
             --shadow:rgba(0,0,0,.05);
             --input-bg:#fafafa;
+            --font:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI Variable','Segoe UI',Roboto,'Helvetica Neue',Arial,'Noto Sans',sans-serif,'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji';
+            color-scheme:light;
         }
         [data-theme="dark"]{
             --bg:#000;--bg-alt:#0a0a0c;--card:#141416;--card-2:#1c1c1e;
             --border:#26262a;--border-2:#3a3a3c;
-            --text:#f5f5f7;--text-2:#a1a1a6;--text-3:#6e6e73;
-            --accent:#30d158;--accent-bg:rgba(48,209,88,.15);--accent-text:#30d158;
+            --text:#f5f5f7;--text-2:#a1a1a6;--text-3:#8e8e93;
+            --accent:#30d158;--accent-bg:rgba(48,209,88,.15);--accent-text:#30d158;--on-accent:#000;
+            --danger:#ff453a;
             --nav-bg:rgba(0,0,0,.7);
             --shadow:rgba(0,0,0,.5);
             --input-bg:#2c2c2e;
+            color-scheme:dark;
         }
         *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-        html{scroll-behavior:smooth}
+        html{scroll-behavior:smooth;scroll-padding-top:72px;-webkit-text-size-adjust:100%;text-size-adjust:100%}
         body{
-            font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+            font-family:var(--font);
             background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;
-            -webkit-font-smoothing:antialiased;transition:background .4s,color .4s;
+            -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;transition:background .4s,color .4s;
         }
+        h1,h2,h3{text-wrap:balance}
+        p{text-wrap:pretty}
         a{color:inherit;text-decoration:none}
         img{max-width:100%;height:auto;display:block}
         ul{list-style:none}
-        button{font-family:inherit}
+        button,input,select,textarea{font-family:inherit}
 
         .container{max-width:1200px;margin:0 auto;padding:0 24px}
         .section{padding:48px 0;position:relative}
@@ -44,13 +57,15 @@
         .section-title{font-size:clamp(2rem,4vw,3rem);font-weight:600;letter-spacing:-.02em;line-height:1.15;margin-bottom:20px}
         .section-sub{font-size:1.05rem;color:var(--text-2);max-width:620px;margin-bottom:28px;font-weight:400}
         [onclick],.area-chip{-webkit-tap-highlight-color:transparent}
-        :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+        :focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 
-        .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 30px;border-radius:100px;border:none;font-size:.95rem;font-weight:500;cursor:pointer;transition:all .25s ease}
-        .btn-accent{background:var(--accent);color:#fff}
+        .btn{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:14px 30px;border-radius:100px;border:none;font-size:.95rem;font-weight:500;cursor:pointer;transition:all .25s ease;touch-action:manipulation}
+        .btn:active{transform:scale(.98)}
+        .btn:disabled{opacity:.6;cursor:progress}
+        .btn-accent{background:var(--accent);color:var(--on-accent)}
         .btn-accent:hover{filter:brightness(1.1);transform:translateY(-1px)}
-        .gps-btn{background:transparent;color:var(--accent);border:1px solid var(--accent);border-radius:10px;padding:8px 10px;font-size:.8rem;cursor:pointer;width:100%;margin-bottom:10px}
-        .gps-btn:hover{background:rgba(48,209,88,.1)}
+        .gps-btn{background:transparent;color:var(--accent-text);border:1px solid var(--accent);border-radius:10px;padding:8px 10px;font-size:.85rem;cursor:pointer;width:100%;margin-bottom:10px}
+        .gps-btn:hover{background:var(--accent-bg)}
         .btn-outline{background:transparent;color:var(--text);border:1.5px solid var(--border-2)}
         .btn-outline:hover{border-color:var(--accent);color:var(--accent-text)}
         .btn-call{background:var(--text);color:var(--bg);padding:16px 40px;font-size:1.1rem;font-weight:600}
@@ -65,24 +80,29 @@
         .nav-links a{font-size:.85rem;font-weight:500;color:var(--text-2);transition:color .2s}
         .nav-links a:hover{color:var(--text)}
         .nav-actions{display:flex;gap:8px;align-items:center}
-        .nav-btn{width:36px;height:36px;border-radius:50%;border:1px solid var(--border-2);background:var(--card);color:var(--text);cursor:pointer;font-size:.85rem;font-weight:600;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
+        .nav-btn{width:44px;height:44px;border-radius:50%;border:1px solid var(--border-2);background:var(--card);color:var(--text);cursor:pointer;font-size:.85rem;font-weight:600;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
         .nav-btn:hover{border-color:var(--accent);color:var(--accent-text)}
-        .nav-phone{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;border-radius:100px;background:var(--accent);color:#fff!important;font-weight:600!important;white-space:nowrap}
-        .nav-toggle{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:4px}
+        .nav-phone{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;min-width:44px;padding:8px 18px;border-radius:100px;background:var(--accent);color:var(--on-accent)!important;font-weight:600!important;white-space:nowrap}
+        .nav-phone:hover{filter:brightness(1.1)}
+        .nav-toggle{display:none;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:44px;height:44px;background:none;border:none;border-radius:10px;cursor:pointer;padding:0;color:var(--text)}
+        .nav-toggle:hover span{background:var(--accent)}
         .nav-toggle span{width:24px;height:2px;background:var(--text);border-radius:2px;transition:all .3s}
 
-        .lead-modal{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.5);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity .4s}
-        .lead-modal.active{opacity:1;pointer-events:all}
-        .lead-modal-box{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:44px 40px;max-width:440px;width:90%;text-align:center;transform:translateY(20px) scale(.97);transition:transform .4s cubic-bezier(.22,1,.36,1);position:relative}
+        /* visibility:hidden keeps the closed modal out of the tab order */
+        .lead-modal{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .4s,visibility .4s}
+        .lead-modal.active{opacity:1;visibility:visible;pointer-events:all}
+        .lead-modal-box{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:44px 40px;max-width:440px;width:100%;max-height:calc(100dvh - 32px);overflow-y:auto;overscroll-behavior:contain;text-align:center;transform:translateY(20px) scale(.97);transition:transform .4s cubic-bezier(.22,1,.36,1);position:relative}
+        .lead-modal-box:focus{outline:none}
         .lead-modal.active .lead-modal-box{transform:translateY(0) scale(1)}
-        .lead-modal-box h2{font-size:1.5rem;font-weight:700;margin-bottom:6px;letter-spacing:-.02em}
-        .lead-modal-x{position:absolute;top:8px;right:12px;width:32px;height:32px;border-radius:50%;border:1px solid var(--border-2);background:var(--card);color:var(--text-3);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;transition:all .2s;z-index:2}
-        .lead-modal-x:hover{border-color:var(--accent);color:var(--text-2)}
+        .lead-modal-box h2{font-size:1.5rem;font-weight:700;margin-bottom:6px;letter-spacing:-.02em;padding:0 36px}
+        .lead-modal-x{position:absolute;top:8px;right:8px;width:44px;height:44px;border-radius:50%;border:1px solid var(--border-2);background:var(--card);color:var(--text-2);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;transition:all .2s;z-index:2}
+        .lead-modal-x:hover{border-color:var(--accent);color:var(--text)}
         .lead-modal-box p{color:var(--text-2);margin-bottom:22px;font-size:.9rem}
-        .lead-modal input{width:100%;padding:14px 16px;margin-bottom:10px;border-radius:10px;border:1.5px solid var(--border-2);background:var(--input-bg);color:var(--text);font-size:.95rem;outline:none;transition:border-color .25s}
-        .lead-modal input:focus{border-color:var(--accent)}
+        .lead-modal input{width:100%;min-height:48px;padding:13px 16px;margin-bottom:10px;border-radius:10px;border:1.5px solid var(--border-2);background:var(--input-bg);color:var(--text);font-size:1rem;outline:none;transition:border-color .25s,box-shadow .25s}
+        .lead-modal input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-bg)}
         .lead-modal input::placeholder{color:var(--text-3)}
         .lead-modal .btn{width:100%;justify-content:center}
+        .lead-or a{display:inline-block;padding:12px 4px;color:var(--accent-text);font-weight:700}
 
         .hero{min-height:88vh;display:flex;align-items:center;background:var(--bg);padding-top:76px;padding-bottom:32px;overflow:hidden;position:relative}
         .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 85% 15%,var(--accent-bg),transparent 45%);pointer-events:none;opacity:.6}
@@ -91,8 +111,10 @@
         .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 16px;border-radius:100px;background:var(--card-2);border:1px solid var(--border);font-size:.78rem;font-weight:500;color:var(--text-2);margin-bottom:20px}
         .hero-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:blink 1.6s infinite}
         @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-        .hero h1{font-size:clamp(2.5rem,5.5vw,4.2rem);font-weight:700;letter-spacing:-.03em;line-height:1.04;margin-bottom:16px}
+        /* fluid: ~34px @320, ~36px @375, caps at 67px desktop */
+        .hero h1{font-size:clamp(2.1rem,1.2rem + 4.6vw,4.2rem);font-weight:700;letter-spacing:-.03em;line-height:1.06;margin-bottom:16px;text-wrap:balance;overflow-wrap:break-word;text-rendering:optimizeLegibility;font-kerning:normal}
         .hero h1 .accent{color:var(--accent-text)}
+        .hero h1 .h1-ufo{display:inline-block;font-size:.8em;line-height:1;vertical-align:.05em}
         .hero p{font-size:1.1rem;color:var(--text-2);max-width:480px;margin-bottom:28px}
         .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
         .hero-stats{display:flex;gap:28px;margin-top:28px;padding-top:20px;border-top:1px solid var(--border)}
@@ -114,8 +136,10 @@
         .booking-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
         .booking-form{padding:30px;border-radius:16px;background:var(--card);border:1px solid var(--border);box-shadow:0 14px 44px var(--shadow)}
         .booking-form .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-        .booking-form input,.booking-form select,.booking-form textarea{width:100%;padding:13px 14px;margin-bottom:10px;border-radius:10px;border:1.5px solid var(--border-2);background:var(--input-bg);color:var(--text);font-size:.95rem;outline:none;transition:border-color .25s;font-family:inherit}
-        .booking-form input:focus,.booking-form select:focus,.booking-form textarea:focus{border-color:var(--accent)}
+        .booking-form input,.booking-form select,.booking-form textarea{width:100%;min-height:48px;padding:13px 14px;margin-bottom:10px;border-radius:10px;border:1.5px solid var(--border-2);background:var(--input-bg);color:var(--text);font-size:1rem;outline:none;transition:border-color .25s,box-shadow .25s}
+        .booking-form input:focus,.booking-form select:focus,.booking-form textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-bg)}
+        .booking-form ::placeholder{color:var(--text-3)}
+        .booking-form select{cursor:pointer}
         .booking-form select option{background:var(--card);color:var(--text)}
         .booking-form textarea{resize:vertical;min-height:84px}
         .booking-form .btn{width:100%;justify-content:center}
@@ -123,7 +147,8 @@
         .book-call-now .bc-icon{font-size:1.6rem}
         .book-call-now .bc-txt strong{display:block;font-size:1rem;color:var(--accent-text)}
         .book-call-now .bc-txt span{font-size:.8rem;color:var(--text-2)}
-        .book-call-now a{margin-left:auto;font-size:1.2rem;font-weight:700;color:var(--accent-text);white-space:nowrap}
+        .book-call-now a{margin-left:auto;padding:10px 0;font-size:1.2rem;font-weight:700;color:var(--accent-text);white-space:nowrap}
+        .book-call-now a:hover{text-decoration:underline;text-underline-offset:3px}
         .booking-info{padding:0 0 0 10px}
         .booking-info h3{font-size:1.25rem;font-weight:700;margin-bottom:12px;letter-spacing:-.01em}
         .booking-info>p{color:var(--text-2);margin-bottom:20px}
@@ -171,17 +196,27 @@
         #areas{background:var(--bg-alt)}
         .areas-map-wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:start}
         .areas-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;align-content:start}
-        .area-chip{cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px 12px;border-radius:10px;background:var(--card);border:1px solid var(--border);text-align:center;font-weight:500;font-size:.8rem;color:var(--text-2);transition:all .2s}
+        .area-chip{cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;min-height:48px;padding:10px 12px;border-radius:10px;background:var(--card);border:1px solid var(--border);text-align:center;font-weight:500;font-size:.8rem;color:var(--text-2);transition:all .2s}
         .area-chip:hover{background:var(--accent-bg);border-color:var(--accent);color:var(--accent-text)}
         .area-chip svg{width:12px;height:12px;opacity:.6;flex-shrink:0}
         .map-embed{position:sticky;top:76px;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:var(--card)}
         #serviceMap{width:100%;height:420px;background:var(--card-2);z-index:0}
         [data-theme="dark"] #serviceMap .leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(.9) contrast(.9)}
-        #serviceMap .leaflet-popup-content a{color:var(--accent);font-weight:600}
+        /* popups + controls follow the theme (Leaflet ships them white-only) */
+        #serviceMap .leaflet-popup-content-wrapper,#serviceMap .leaflet-popup-tip{background:var(--card);color:var(--text);box-shadow:0 6px 24px var(--shadow)}
+        #serviceMap .leaflet-popup-content{font:inherit;font-size:.85rem;line-height:1.5}
+        #serviceMap .leaflet-popup-content a{display:inline-block;padding:6px 0;color:var(--accent-text);font-weight:600}
+        #serviceMap .leaflet-container a.leaflet-popup-close-button{color:var(--text-2);width:32px;height:32px;font-size:22px;line-height:30px}
+        #serviceMap .leaflet-bar a{background:var(--card);color:var(--text);border-bottom-color:var(--border)}
+        #serviceMap .leaflet-bar a:hover{background:var(--card-2)}
+        #serviceMap .leaflet-control-attribution{background:var(--nav-bg);color:var(--text-3)}
+        #serviceMap .leaflet-control-attribution a{color:var(--text-2)}
+        @media(pointer:coarse){#serviceMap .leaflet-touch .leaflet-bar a,#serviceMap.leaflet-touch .leaflet-bar a{width:44px;height:44px;line-height:44px}}
         .map-pin{width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid #fff;box-shadow:0 0 0 2px var(--accent)}
         .map-hq{font-size:26px;line-height:1;filter:drop-shadow(0 3px 6px rgba(0,0,0,.5))}
-        .map-note{padding:12px 16px;font-size:.8rem;color:var(--text-3);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-        .map-note a{color:var(--accent-text);font-weight:600}
+        .map-note{padding:4px 16px;font-size:.8rem;color:var(--text-3);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+        .map-note a{display:inline-block;padding:12px 0;color:var(--accent-text);font-weight:600}
+        .map-note a:hover{text-decoration:underline;text-underline-offset:3px}
 
         /* vehicles + parts at BOTTOM of page */
         #vehicles{background:var(--bg)}
@@ -193,10 +228,9 @@
         .vehicle-img img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
         .vehicle-img .badge{position:absolute;top:12px;right:12px;z-index:1;padding:3px 12px;border-radius:100px;font-size:.72rem;font-weight:600}
         .vehicle-img .badge.avail{background:var(--accent-bg);color:var(--accent-text)}
-        .vehicle-img .badge.sold{background:rgba(204,51,51,.12);color:#d33}
+        .vehicle-img .badge.sold{background:rgba(204,51,51,.12);color:var(--danger)}
         .vehicle-img .swatch{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:100px;background:var(--card);border:1px solid var(--border);color:var(--text-2);font-weight:500}
         .vehicle-img .swatch::before{content:'';width:10px;height:10px;border-radius:50%;background:var(--accent)}
-        .vehicle-img .photo-slot{position:absolute;bottom:12px;left:12px;padding:3px 10px;border-radius:100px;border:1px dashed var(--border-2);font-size:.7rem;color:var(--text-3);background:var(--card)}
         .vehicle-info{padding:22px;display:flex;flex-direction:column;flex:1}
         .vehicle-info h3{font-size:1rem;font-weight:600;margin-bottom:4px}
         .vehicle-info .price{font-size:1.3rem;font-weight:700;color:var(--accent-text);margin-bottom:6px}
@@ -205,8 +239,8 @@
 
         #parts{background:var(--bg-alt)}
         .parts-search{display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap}
-        .parts-search input{flex:1;min-width:200px;padding:13px 16px;border-radius:10px;border:1.5px solid var(--border-2);background:var(--input-bg);color:var(--text);font-size:.95rem;outline:none;transition:border-color .25s}
-        .parts-search input:focus{border-color:var(--accent)}
+        .parts-search input{flex:1;min-width:200px;min-height:48px;padding:13px 16px;border-radius:10px;border:1.5px solid var(--border-2);background:var(--input-bg);color:var(--text);font-size:1rem;outline:none;transition:border-color .25s,box-shadow .25s}
+        .parts-search input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-bg)}
         .parts-search input::placeholder{color:var(--text-3)}
         .parts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(240px,100%),1fr));gap:12px}
         .part-card{cursor:pointer;display:flex;flex-direction:column;gap:12px;padding:18px;border-radius:12px;background:var(--card);border:1px solid var(--border);transition:all .2s;opacity:0;transform:translateY(12px)}
@@ -220,7 +254,7 @@
         .cta-section{background:var(--text);color:var(--bg);padding:48px 0;text-align:center;position:relative;overflow:hidden}
         .cta-section h2{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:700;letter-spacing:-.02em;margin-bottom:10px}
         .cta-section p{font-size:1rem;opacity:.7;margin-bottom:24px}
-        .cta-section .btn{background:var(--accent);color:#fff}
+        .cta-section .btn{background:var(--accent);color:var(--on-accent)}
         .cta-section .btn:hover{filter:brightness(1.1)}
         footer{padding:32px 0;border-top:1px solid var(--border);text-align:center}
         footer p{font-size:.8rem;color:var(--text-3)}
@@ -229,15 +263,27 @@
         footer .ft-phone:hover{filter:brightness(1.15)}
         footer .ft-contact p{font-size:.85rem;color:var(--text-2);font-weight:500}
         footer .socials{display:flex;justify-content:center;gap:14px;margin-bottom:14px}
-        footer .socials a{width:36px;height:36px;border-radius:50%;border:1px solid var(--border-2);display:flex;align-items:center;justify-content:center;transition:all .2s;font-size:.9rem;color:var(--text-2)}
+        footer .socials a{width:48px;height:48px;border-radius:50%;border:1px solid var(--border-2);display:flex;align-items:center;justify-content:center;transition:all .2s;font-size:.9rem;color:var(--text-2)}
         footer .socials a:hover{border-color:var(--accent);color:var(--accent-text)}
 
         /* sticky emergency call bar (mobile only) */
-        .sticky-call{position:fixed;left:14px;right:14px;bottom:14px;z-index:150;display:none;align-items:center;justify-content:center;gap:10px;background:var(--accent);color:#fff;font-weight:700;font-size:1.05rem;padding:16px;border-radius:100px;box-shadow:0 10px 34px rgba(0,0,0,.35)}
-        body{padding-bottom:0}
+        .sticky-call{position:fixed;left:14px;right:14px;bottom:14px;z-index:150;display:none;align-items:center;justify-content:center;gap:10px;background:var(--accent);color:var(--on-accent);font-weight:700;font-size:1.05rem;padding:16px;border-radius:100px;box-shadow:0 10px 34px rgba(0,0,0,.35)}
+        .sticky-call:active{transform:scale(.98)}
 
         .fade-up{opacity:0;transform:translateY(20px);transition:all .5s ease-out}
         .fade-up.visible{opacity:1;transform:translateY(0)}
+
+        /* hover lift only on real pointers — avoids "stuck" hover after a tap on phones */
+        @media(hover:none){
+            .service-card:hover,.fleet-card:hover,.vehicle-card:hover{transform:translateY(0)}
+            .fleet-card:hover img{transform:none}
+            .btn-accent:hover{transform:none}
+        }
+        @media(pointer:coarse){
+            .nav-btn,.nav-toggle{width:48px;height:48px}
+            .nav-phone{min-height:48px;min-width:48px}
+            .lead-modal-x{width:48px;height:48px;top:6px;right:6px}
+        }
 
         @media(max-width:920px){
             .hero>.container{flex-direction:column-reverse;text-align:center}
@@ -249,7 +295,8 @@
             .booking-info{padding:0;text-align:left}
             .areas-map-wrap{grid-template-columns:1fr}
             .map-embed{position:static}
-            .nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:var(--nav-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:20px 24px;flex-direction:column;align-items:flex-start;gap:16px;border-bottom:1px solid var(--border)}
+            .nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:var(--nav-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:8px 24px;flex-direction:column;align-items:stretch;gap:0;border-bottom:1px solid var(--border)}
+            .nav-links a{display:flex;align-items:center;min-height:48px;font-size:1rem}
             .nav-links.open{display:flex}
             .nav-toggle{display:flex}
         }
@@ -268,13 +315,19 @@
             #serviceMap{height:320px}
             .section-sub{margin-bottom:22px}
             .areas-grid{grid-template-columns:repeat(2,1fr)}
-            .hero h1{font-size:2.2rem}
+            .hero h1{letter-spacing:-.025em;line-height:1.1}
+            .hero p{font-size:1.02rem}
             .testimonial-card{width:290px}
             .nav-phone .txt{display:none}
             .nav-logo span.txt{display:none}
             .book-call-now a{font-size:1rem}
             .sticky-call{display:flex}
             body{padding-bottom:78px}
+        }
+        @media(prefers-reduced-motion:reduce){
+            html{scroll-behavior:auto}
+            *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+            .testimonial-wrap{overflow-x:auto}
         }
     </style>
 </head>
@@ -283,7 +336,7 @@
     <nav id="nav">
         <div class="container">
             <a href="#" class="nav-logo">
-                <img src="assets/logo.png" alt="Alien Towing">
+                <img src="assets/logo.png" alt="Alien Towing" width="34" height="34" loading="eager" decoding="async">
                 <span class="txt">Alien Towing</span>
             </a>
             <div class="nav-links" id="navLinks">
@@ -295,10 +348,10 @@
                 <a href="#areas" data-i18n="nav_areas">Areas</a>
             </div>
             <div class="nav-actions">
-                <button class="nav-btn" id="langToggle" title="Español / English" onclick="toggleLang()">ES</button>
-                <button class="nav-btn" id="themeToggle" title="Dark / Light" onclick="toggleTheme()">🌙</button>
-                <a href="tel:+17046051318" class="nav-phone">📞 <span class="txt" data-phone>(704) 605-1318</span></a>
-                <button class="nav-toggle" id="navToggle" aria-label="Menu">
+                <button type="button" class="nav-btn" id="langToggle" title="Español / English" aria-label="Español / English" onclick="toggleLang()">ES</button>
+                <button type="button" class="nav-btn" id="themeToggle" title="Dark / Light" aria-label="Dark / Light" onclick="toggleTheme()">🌙</button>
+                <a href="tel:+17046051318" class="nav-phone" data-phone-link aria-label="Call (704) 605-1318"><span aria-hidden="true">📞</span> <span class="txt" data-phone>(704) 605-1318</span></a>
+                <button type="button" class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
                     <span></span><span></span><span></span>
                 </button>
             </div>
@@ -306,26 +359,28 @@
     </nav>
 
     <div class="lead-modal" id="leadModal">
-        <div class="lead-modal-box">
-            <h2 data-i18n="lead_title">Need a tow? 🚨</h2>
-            <p data-i18n="lead_sub">Drop your name &amp; number — we call you back. Fast.</p>
+        <div class="lead-modal-box" role="dialog" aria-modal="true" aria-labelledby="leadTitle" aria-describedby="leadSub" tabindex="-1">
+            <h2 id="leadTitle" data-i18n="lead_title">Need a tow? 🚨</h2>
+            <p id="leadSub" data-i18n="lead_sub">Drop your name &amp; number — we call you back. Fast.</p>
             <form id="leadForm">
-                <input type="text" name="name" placeholder="Your name" data-i18n-ph="ph_name" autocomplete="name" required>
-                <input type="tel" name="phone" placeholder="Phone number" data-i18n-ph="ph_phone" autocomplete="tel" required>
-                <input type="text" name="location" placeholder="Where is the vehicle right now?" data-i18n-ph="ph_loc" autocomplete="address-line1">
-                <button type="button" class="btn gps-btn" onclick="getLocation()">📍 Use my location</button>
+                <input type="text" name="name" placeholder="Your name" data-i18n-ph="ph_name" autocomplete="name" enterkeyhint="next" required>
+                <input type="tel" name="phone" placeholder="Phone number" data-i18n-ph="ph_phone" autocomplete="tel" inputmode="tel" enterkeyhint="next" required>
+                <input type="text" name="location" id="leadLocation" placeholder="Where is the vehicle right now?" data-i18n-ph="ph_loc" autocomplete="address-line1" enterkeyhint="send">
+                <button type="button" class="btn gps-btn" id="gpsBtn" onclick="getLocation()">📍 Use my location</button>
                 <button type="submit" class="btn btn-accent" data-i18n="lead_btn">☎ We'll Call You</button>
             </form>
-            <p style="margin-top:10px;font-size:.78rem;color:var(--text-3)"><span data-i18n="lead_or">Or call</span> <a href="tel:+17046051318" style="color:var(--accent-text);font-weight:700;text-decoration:none" data-phone-link><strong data-phone>(704) 605-1318</strong></a></p>
-            <button class="lead-modal-x" id="dismissModal">✕</button>
+            <p class="lead-or" style="margin-top:6px;margin-bottom:0;font-size:.78rem;color:var(--text-3)"><span data-i18n="lead_or">Or call</span> <a href="tel:+17046051318" data-phone-link><strong data-phone>(704) 605-1318</strong></a></p>
+            <button type="button" class="lead-modal-x" id="dismissModal" aria-label="Close">✕</button>
         </div>
     </div>
+
+    <main id="main">
 
     <section class="hero">
         <div class="container">
             <div class="hero-content">
                 <div class="hero-badge"><span class="dot"></span><span data-i18n="hero_badge">24/7 Emergency Towing — Charlotte NC</span></div>
-                <h1><span data-i18n="hero_h1a">Towing that's</span><br><span class="accent" data-i18n="hero_h1b">literally out of this world</span> 🛸</h1>
+                <h1><span data-i18n="hero_h1a">Towing that's</span><br><span class="accent" data-i18n="hero_h1b">literally out of this world</span>&nbsp;<span class="h1-ufo" aria-hidden="true">🛸</span></h1>
                 <p data-i18n="hero_p">Broken down? Stranded? One call and we're there in 1-5 minutes. Real person, real truck, right now.</p>
                 <div class="hero-actions">
                     <a href="tel:+17046051318" class="btn btn-call" data-phone-link>📞 <span data-i18n="hero_call">Call Now</span> — <span data-phone>(704) 605-1318</span></a>
@@ -338,8 +393,8 @@
                 </div>
             </div>
             <div class="hero-visual">
-                <div class="ufo-float">🛸</div>
-                <img src="assets/truck-ram2500.jpg" alt="Alien Towing RAM 2500 tow truck">
+                <div class="ufo-float" aria-hidden="true">🛸</div>
+                <img src="assets/truck-ram2500.jpg" alt="Alien Towing RAM 2500 tow truck" width="1554" height="1012" loading="eager" fetchpriority="high">
             </div>
         </div>
     </section>
