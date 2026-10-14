@@ -11,6 +11,7 @@
     <link rel="preload" as="image" href="assets/truck-ram2500.jpg" fetchpriority="high">
     <link rel="dns-prefetch" href="https://unpkg.com">
     <link rel="dns-prefetch" href="https://tile.openstreetmap.org">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
     <!-- apply saved theme before first paint (no dark→light flash) -->
     <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('theme')||'dark')}catch(e){}</script>
     <style>
@@ -336,7 +337,7 @@
     <nav id="nav">
         <div class="container">
             <a href="#" class="nav-logo">
-                <img src="assets/logo.png" alt="Alien Towing" width="34" height="34" loading="eager" decoding="async">
+                <img src="assets/logo.svg" alt="Alien Towing" width="34" height="34" loading="eager" decoding="async">
                 <span class="txt">Alien Towing</span>
             </a>
             <div class="nav-links" id="navLinks">
@@ -477,8 +478,8 @@
             <h2 class="section-title fade-up" data-i18n="t_fleet">Meet the trucks</h2>
             <p class="section-sub fade-up" data-i18n="s_fleet">Real trucks. Real work. Ready for anything.</p>
             <div class="fleet-grid">
-                <div class="fleet-card" onclick="callNow()"><div class="ph"><img src="assets/fleet-ram5500-loaded.png" alt="RAM 5500 heavy duty" loading="lazy"></div><div class="cap" data-i18n="ft1">RAM 5500 — Loaded & ready</div></div>
-                <div class="fleet-card" onclick="callNow()"><div class="ph"><img src="assets/fleet-ram2500-action.png" alt="Alien Towing flatbed hauling a blue coupe" loading="lazy"></div><div class="cap" data-i18n="ft2">RAM 2500 — On the job</div></div>
+                <div class="fleet-card" onclick="callNow()"><div class="ph"><img src="assets/fleet-ram5500-loaded.jpg" alt="RAM 5500 heavy duty" loading="lazy"></div><div class="cap" data-i18n="ft1">RAM 5500 — Loaded & ready</div></div>
+                <div class="fleet-card" onclick="callNow()"><div class="ph"><img src="assets/fleet-ram2500-action.jpg" alt="Alien Towing flatbed hauling a blue coupe" loading="lazy"></div><div class="cap" data-i18n="ft2">RAM 2500 — On the job</div></div>
                 <div class="fleet-card" onclick="callNow()"><div class="ph"><img src="assets/fleet-dodge-flatbed.jpg" alt="Dodge flatbed" loading="lazy"></div><div class="cap" data-i18n="ft3">Dodge Flatbed — Ready to roll</div></div>
                 <div class="fleet-card" onclick="callNow()"><div class="ph top"><img src="assets/tow-van.jpg" alt="Flatbed hauling a white cargo van" loading="lazy"></div><div class="cap" data-i18n="ft4">Flatbed — SUV recovery</div></div>
                 <div class="fleet-card" onclick="callNow()"><div class="ph"><img src="assets/tow-junk-buy.jpg" alt="Alien Towing RAM 5500 flatbed — We buy junk cars" loading="lazy"></div><div class="cap" data-i18n="ft6">We buy junk cars — Cash today</div></div>
@@ -748,8 +749,12 @@
                 `<a class="area-chip fade-up" href="${mapsUrl(a)}" target="_blank" rel="noopener" onclick="callNow()">${pin()}${a}</a>`
             ).join('')
         }
-        function initMap(){
-            if(!window.L) return;
+        function initMap(retries){
+            if(!retries) retries = 0;
+            if(!window.L){ 
+                if(retries < 3) setTimeout(() => initMap(retries + 1), 1500);
+                return;
+            }
             const map=L.map('serviceMap',{scrollWheelZoom:false,attributionControl:true}).setView(HQ,10);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; OpenStreetMap'}).addTo(map);
             const ring=L.circle(HQ,{radius:32187,color:'#30d158',weight:2,fillColor:'#30d158',fillOpacity:.1}).addTo(map); /* 20 mi */
