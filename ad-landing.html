@@ -362,17 +362,20 @@
             spinner.style.display = 'block';
             btn.disabled = true;
 
-            // Deliver lead to Telegram
-            fetch('https://api.telegram.org/bot8861182350:AAEjo69clBvM-Ycta-Aa9GxDJqGVuFAMOok/sendMessage', {
+            // Deliver lead to server-side relay (Cloudflare Pages Function)
+            fetch('/lead', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
-                    chat_id: '8102384229',
-                    text: `🚨 NEW LEAD — Alien Towing\n\nName: ${data.name}\nPhone: ${data.phone}\nLocation: ${data.location || '—'}\nSource: Google Ads\nAd: ${utmCampaign || 'search'}${gclid ? '\nGCLID: '+gclid : ''}`
+                    name: data.name,
+                    phone: data.phone,
+                    location: data.location || '',
+                    source: 'google-ads',
+                    utm_campaign: utmCampaign,
+                    gclid: gclid,
+                    ts: new Date().toISOString()
                 })
             }).catch(() => {});
-            // Also log locally
-            try{fetch('http://localhost:8001/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({form:'ad-landing-form',...data,source:'google-ads',ts:new Date().toISOString()})}).catch(()=>{})}catch(e){}
 
             // Show success
             setTimeout(() => {
