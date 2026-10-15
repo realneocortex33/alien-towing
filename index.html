@@ -794,16 +794,21 @@
             const adParams = new URLSearchParams(window.location.search);
             const utmCampaign = adParams.get('utm_campaign') || '';
             const gclid = adParams.get('gclid') || '';
-            fetch('https://api.telegram.org/bot8861182350:AAEjo69clBvM-Ycta-Aa9GxDJqGVuFAMOok/sendMessage',{
+            fetch('/lead',{
                 method:'POST',
                 headers:{'Content-Type':'application/json'},
                 body:JSON.stringify({
-                    chat_id:'8102384229',
-                    text:`🚨 NEW LEAD — Alien Towing (${form})\n\nName: ${data.name}\nPhone: ${data.phone}\nLocation: ${data.location || '—'}\nService: ${data.service || '—'}\nAd: ${utmCampaign || 'organic'}${gclid ? '\nGCLID: '+gclid : ''}`
+                    form: form,
+                    name: data.name,
+                    phone: data.phone,
+                    location: data.location || '',
+                    service: data.service || '',
+                    lang: lang,
+                    utm_campaign: utmCampaign || 'organic',
+                    gclid: gclid || '',
+                    ts: new Date().toISOString()
                 })
             }).catch(()=>{});
-            // Also log locally
-            try{fetch('http://localhost:8001/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({form:form, ...data, lang:lang, ts:new Date().toISOString()})}).catch(()=>{})}catch(e){}
         }
 
         /* ============ FORMS ============ */
