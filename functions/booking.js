@@ -10,7 +10,7 @@ export default {
             const { name, phone, email, vehicle, service, details } = data;
 
             if (!name || !phone || !vehicle || !service) {
-                return new Response(JSON.stringify({ error: 'Name, phone, vehicle, and service required' }), { status: 400 });
+                return new Response(JSON.stringify({ error: 'Name, phone, vehicle, and service required' }), { status: 400, headers: { 'Access-Control-Allow-Origin': 'https://alientowingservices.com' } });
             }
 
             // Notify via Telegram
@@ -28,23 +28,28 @@ export default {
                 `Time: ${new Date().toLocaleString('en-US', { timeZone: 'America/New_York' })}`
             ].join('\n');
 
-            if (TELEGRAM_BOT_TOKEN && TELEGRAM_CHAT_ID) {
-                await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+            if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
+                return new Response(JSON.stringify({ error: 'Telegram not configured' }), {
+                    status: 500,
+                    headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'https://alientowingservices.com' }
+                });
+            }
+
+            await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text: msg })
                 });
-            }
 
             if (env.BOOKINGS_KV) {
                 await env.BOOKINGS_KV.put(`booking_${Date.now()}`, JSON.stringify({ ...data, timestamp: Date.now() }));
             }
 
             return new Response(JSON.stringify({ success: true }), {
-                headers: { 'Content-Type': 'application/json' }
+                headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'https://alientowingservices.com' }
             });
         } catch (err) {
-            return new Response(JSON.stringify({ error: err.message }), { status: 500 });
+            return new Response(JSON.stringify({ error: err.message }), { status: 500, headers: { 'Access-Control-Allow-Origin': 'https://alientowingservices.com' } });
         }
     }
 };

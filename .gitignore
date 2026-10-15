@@ -1,1 +1,11 @@
 .claude-flow/
+leads.log
+*.log
+.env
+.DS_Store
+__pycache__/
+*.pyc
+node_modules/
+secrets/
+*.pem
+*.key
