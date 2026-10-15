@@ -1,9 +1,18 @@
 name = "alien-towing"
 compatibility_date = "2026-10-09"
+pages = true
 
+# Static assets served from root
 [build]
-command = "echo 'static site'"
+command = "echo 'static site with Pages Functions'"
 output = "/"
 
+# Lead relay via Pages Functions (functions/ directory)
 [[build.conditions]]
 type = "skip"
+
+[env.STAGING]
+compatibility_date = "2026-10-09"
+
+[env.PRODUCTION]
+compatibility_date = "2026-10-09"

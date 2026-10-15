@@ -335,15 +335,19 @@
     <script>
         // Track conversions — simple event logging
     function getLocation(){
-        if(!navigator.geolocation) return;
+        if(!('geolocation' in navigator)) return;
+        const el = document.querySelector('[name="location"]');
+        if(!el || el.value.trim()) return; // don't overwrite manual entry
         navigator.geolocation.getCurrentPosition(async pos=>{
             try{
-                const res = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&format=json`);
+                const lat = pos.coords.latitude.toFixed(6);
+                const lon = pos.coords.longitude.toFixed(6);
+                const res = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`);
                 const data = await res.json();
-                const el = document.querySelector('[name="location"]');
-                if(el) el.value = (data.displayName||'').split(',').slice(0,2).join(',') || 'Charlotte NC';
+                if(el.value.trim()) return; // user typed while we fetched
+                el.value = (data.display_name||lat+','+lon).split(',').slice(0,2).join(',');
             }catch(e){}
-        });
+        },()=>{}, {timeout:8000});
     }
     // Capture ad click params for lead tracking
     const adParams = new URLSearchParams(window.location.search);

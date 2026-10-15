@@ -5,11 +5,18 @@ export default {
       const data = await request.json();
       const msg = `🚨 NEW LEAD — Alien Towing\n\nName: ${data.name || '—'}\nPhone: ${data.phone || '—'}\nLocation: ${data.location || '—'}\nService: ${data.service || '—'}\nSource: ${data.source || 'web'}`;
       
-      // Replace these
-      const token = '8861182350:AAEjo69clBvM-Ycta-Aa9GxDJqGVuFAMOok';
-      const chat_id = '8102384229';
+      // Read from env vars — set via Cloudflare Dashboard or wrangler secret
+            const token = env.TELEGRAM_BOT_TOKEN || '';
+            const chat_id = env.TELEGRAM_CHAT_ID || '8102384229';
       
-      await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+            if (!token) {
+              return new Response(JSON.stringify({ ok: false, error: 'TELEGRAM_BOT_TOKEN not configured' }), {
+                status: 500,
+                headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+              });
+            }
+      
+            await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ chat_id, text: msg })
