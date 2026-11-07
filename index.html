@@ -787,6 +787,24 @@
             document.getElementById('testimonialTrack').innerHTML=cards+cards;
         }
 
+
+        /* ============ LEAD → TEXT TO THE BUSINESS LINE (11-06) ============ */
+        /* The site is on GitHub Pages, which can't receive forms. Until a form backend exists, the customer's
+           own phone sends the request: we open their text app pre-filled to (704) 605-1318. */
+        const LEAD_LINE = '+17046051318';
+        function isPhoneDevice(){ return /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent); }
+        function textLead(d, es){
+            const parts = [es ? 'Solicitud Alien Towing' : 'Alien Towing request'];
+            if (d.name) parts.push((es ? 'Nombre: ' : 'Name: ') + d.name);
+            if (d.phone) parts.push((es ? 'Tel: ' : 'Phone: ') + d.phone);
+            if (d.location) parts.push((es ? 'Ubicación: ' : 'Location: ') + d.location);
+            if (d.service) parts.push((es ? 'Servicio: ' : 'Service: ') + d.service);
+            if (d.date || d.time) parts.push((es ? 'Cuándo: ' : 'When: ') + [d.date, d.time].filter(Boolean).join(' '));
+            const body = encodeURIComponent(parts.join('\n'));
+            if (isPhoneDevice()) { window.location.href = 'sms:' + LEAD_LINE + '?&body=' + body; return true; }
+            return false;
+        }
+
         /* ============ LEAD DELIVERY ============ */
         /* Sends every form to Telegram and also tries local relay */
         function deliverLead(form, data){
@@ -816,7 +834,9 @@
             e.preventDefault();const d=Object.fromEntries(new FormData(this));
             console.log('Lead:',d);
             deliverLead('lead-popup-form', d);
-            alert(lang==='es'?'¡Recibido! Te llamamos enseguida. — Alien Towing':'Got it! We\'ll call you right back. — Alien Towing');
+            const sent = textLead(d, lang==='es');
+            alert(sent ? (lang==='es'?'Abrimos tu app de mensajes — toca ENVIAR para que recibamos tu solicitud. ¿Emergencia? Llama al (704) 605-1318.':'Opening your text app — tap SEND so we get your request. Emergency? Call (704) 605-1318.')
+                       : (lang==='es'?'Para atenderte ya, llama o envía un texto al (704) 605-1318 — contestamos 24/7.':'To reach us right now, call or text (704) 605-1318 — we answer 24/7.'));
             document.getElementById('leadModal').classList.remove('active');this.reset()
         });
         document.getElementById('dismissModal').addEventListener('click',()=>{
@@ -827,7 +847,9 @@
             e.preventDefault();const d=Object.fromEntries(new FormData(this));
             console.log('Booking:',d);
             deliverLead('booking-form', d);
-            alert(lang==='es'?'¡Reserva enviada! Confirmamos en 5 minutos.':'Booking submitted! We\'ll confirm within 5 minutes.');
+            const sent = textLead(d, lang==='es');
+            alert(sent ? (lang==='es'?'Abrimos tu app de mensajes — toca ENVIAR para confirmar tu reserva. O llama al (704) 605-1318.':'Opening your text app — tap SEND to book. Or call (704) 605-1318.')
+                       : (lang==='es'?'Para reservar ya, llama o envía un texto al (704) 605-1318 — contestamos 24/7.':'To book now, call or text (704) 605-1318 — we answer 24/7.'));
             this.reset()
         });
 

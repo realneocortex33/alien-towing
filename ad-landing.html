@@ -288,8 +288,8 @@
                 </form>
                 <div class="success-msg" id="adLeadSuccess">
                     <div class="icon">✅</div>
-                    <h3>Got it!</h3>
-                    <p>We'll call you back in minutes. If it's an emergency, call now instead.</p>
+                    <h3 id="adLeadTitle">Almost there!</h3>
+                    <p id="adLeadMsg">Tap SEND in your text app so we get your request. Emergency? Call now.</p>
                     <a href="tel:+17046051318" style="display:inline-block;margin-top:12px;padding:10px 20px;border-radius:100px;background:#30d158;color:#000;font-weight:700;font-size:.9rem">📞 Call Now</a>
                 </div>
                 <div class="or-call">Prefer to talk now? <a href="tel:+17046051318">Call (704) 605-1318</a></div>
@@ -380,6 +380,17 @@
                     ts: new Date().toISOString()
                 })
             }).catch(() => {});
+
+            // Text the request to the business line from the customer's phone (GitHub Pages can't receive forms)
+            const isPhone = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+            if (isPhone) {
+                const body = encodeURIComponent(['Alien Towing request (Google Ads)', 'Name: ' + (data.name || ''), 'Phone: ' + (data.phone || ''),
+                                                 data.location ? 'Location: ' + data.location : ''].filter(Boolean).join('\n'));
+                window.location.href = 'sms:+17046051318?&body=' + body;
+            } else {
+                document.getElementById('adLeadTitle').textContent = 'Call or text us now';
+                document.getElementById('adLeadMsg').textContent = 'Reach us right away at (704) 605-1318 — we answer 24/7.';
+            }
 
             // Show success
             setTimeout(() => {
